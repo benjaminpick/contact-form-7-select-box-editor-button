@@ -1,19 +1,20 @@
-#! /bin/bash
+#!/bin/bash
+# Original of this script: https://github.com/thenbrent/multisite-user-management/blob/master/deploy.sh
 # A modification of Dean Clatworthy's deploy script as found here: https://github.com/deanc/wordpress-plugin-git-svn
 # The difference is that this script lives in the plugin's git repo & doesn't require an existing SVN repo.
 
 # main config
-PLUGINSLUG="multisite-user-management"
+PLUGINSLUG="contact-form-7-select-box-editor-button"
 CURRENTDIR=`pwd`
-MAINFILE="ms-user-management.php" # this should be the name of your main php file in the wordpress plugin
+MAINFILE="contact-form-7-select-box-editor-button.php" # this should be the name of your main php file in the wordpress plugin
 
 # git config
 GITPATH="$CURRENTDIR/" # this file should be in the base of your git repository
 
 # svn config
-SVNPATH="/tmp/$PLUGINSLUG" # path to a temp SVN repo. No trailing slash required and don't add trunk.
-SVNURL="http://plugins.svn.wordpress.org/multisite-user-management/" # Remote SVN repo on wordpress.org, with no trailing slash
-SVNUSER="thenbrent" # your svn username
+SVNPATH="/mnt/tmpfs/$PLUGINSLUG" # path to a temp SVN repo. No trailing slash required and don't add trunk.
+SVNURL="http://plugins.svn.wordpress.org/contact-form-7-select-box-editor-button/" # Remote SVN repo on wordpress.org, with no trailing slash
+SVNUSER="benjamin4" # your svn username
 
 
 # Let's begin...
