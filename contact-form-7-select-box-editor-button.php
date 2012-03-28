@@ -39,18 +39,19 @@ class AddContactForm7Link
 		if ($id <= 0)
 			return _log('Invalid form!'); // How to throw an error/warning?
 		if (!function_exists('wpcf7_contact_form'))
-			return _log('Contact Form 7 installed?');
+			return _log('Contact Form 7 installed and activated?');
 			
 		$contact_form = wpcf7_contact_form( $id );
 		if (!is_object($contact_form))
 			return $contact_form;
 		
 		$text = $contact_form->form;
-		$res = preg_match('/\[select recipient [^"]*(".*")[^"]*\]/i', $text, $matches);
-		if ($res === false)
-			return false;
+		$res = preg_match('/\[select\*? ([a-z]+) [^"]*(".*")[^"]*\]/i', $text, $matches);
+		if ($res == 0)
+			return _log('No select box found.');
 
-		$adresses = $matches[1];
+		$id = $matches[1]; // Currently hardcoded to #recipient
+		$adresses = $matches[2];
 		
 		preg_match_all('/"([^"|]+)\|([^"|]+@[^"|]+)"/', $adresses, $matches, PREG_SET_ORDER);
 		
@@ -85,6 +86,20 @@ class AddContactForm7Link
 			return $first->ID;
 		else
 			return false;
+	}
+	
+	
+	public function check_error()
+	{
+		$id = $this->getFirstContactFormId();
+		if ($id < 1)
+			return __('No Contact Form found.', 'contact-form-7-select-box-editor-button');
+		
+		$ret = $this->get_available_adresses($id);
+		if (is_string($ret))
+			return __($ret, 'contact-form-7-select-box-editor-button');
+
+		return true;
 	}
 	
 }
@@ -152,6 +167,20 @@ function contact_form_7_select_box_editor_button_option_page()
 		update_option('contactLinkPrefix', $_POST['contactLinkPrefix']);
 		update_option('contactTitlePrefix', $_POST['contactTitlePrefix']);
 		$submitted = true;
+	}
+		
+	$class = new AddContactForm7Link();
+	$error_msg = $class->check_error();
+	
+	$contactLinkPrefix = get_option('contactLinkPrefix', '');
+	if (empty($contactLinkPrefix))
+	{
+		if ($error_msg !== true)
+			$error_msg .= "<br />";
+		else
+			$error_msg = '';
+
+		$error_msg .= __('Contact Link Prefix is required!', 'contact-form-7-select-box-editor-button');
 	}
 	include('admin_options.php');
 }

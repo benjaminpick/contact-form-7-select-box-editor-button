@@ -2,6 +2,11 @@
 /* Option page */
 ?>
 <div class="wrap">
+	<?php if ($error_msg !== true) : ?>
+	<div class="error">
+		<p><?php echo $error_msg; ?></p>
+	</div>
+	<?php endif; ?>
 	<?php if ($submitted) : ?>
 	<div class="updated">
 		<p><?php _e('Parameters saved.', 'contact-form-7-select-box-editor-button')?></p>

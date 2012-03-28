@@ -67,6 +67,12 @@ var AddLinkDialog = {
 	getData: function() {
 		var index = jQuery('#selectEmail').val();
 
+		if (typeof(rawData) == 'string')
+		{
+			alert('Error: Setup incomplete. Go to the option page of the editor button to get the full error message.');
+			return {};
+		}
+		
 		if (rawData[index] === undefined)
 		{
 			alert("Unknown name!");
@@ -114,11 +120,15 @@ function updateEmail()
          <tr>
             <td nowrap="nowrap"><label for="contactlink"><?php _e("Contact", 'contact-form-7-select-box-editor-button'); ?></label></td>
             <td>
+<?php if (!is_array($adresses) || empty($adresses)) : ?>
+				<?php _e('Error: There are no contacts to choose from.', 'contact-form-7-select-box-editor-button')?>
+<?php else: ?>
 				<select id="selectEmail" name="email">
-<?php foreach ($adresses as $id => $adress) : ?>
+<?php   foreach ($adresses as $id => $adress) : ?>
 					<option value="<?php echo esc_attr($id); ?>"><?php echo esc_html($adress['name']); ?></option>
-<?php endforeach; ?>
+<?php   endforeach; ?>
 				</select>
+<?php endif; ?>
             </td>
           </tr>
          <tr>
@@ -136,7 +146,7 @@ function updateEmail()
          <tr>
             <td nowrap="nowrap"></td>
             <td>
-            	<?php echo str_replace("[", '<a href="/wp-admin/admin.php?page=wpcf7" target="_top">', str_replace(']', '</a>', __('New Contacts can be added in the [contact form menu].', 'contact-form-7-select-box-editor-button'))); ?>
+            	<?php echo str_replace("[", '<a href="admin.php?page=wpcf7" target="_top">', str_replace(']', '</a>', __('New Contacts can be added in the [contact form menu].', 'contact-form-7-select-box-editor-button'))); ?>
             </td>
           </tr>
         </table>
