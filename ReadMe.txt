@@ -10,6 +10,13 @@ For contact forms where the recipient can be chosen in a select box.
 
 == Description ==
 
+Ever wanted to use one contact form for all your contacts? Yet be able to link to a specific contact?
+And without modifying 
+
+Links:
+
+* Contact Form 7 (required): http://wordpress.org/extend/plugins/contact-form-7/
+
 This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
 
 For backwards compatibility, if this section is missing, the full length of the short description will be used, and
@@ -41,9 +48,27 @@ This section describes how to install the plugin and get it working.
 
 e.g.
 
-1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
+1. Install Contact Form 7 first
+1. Create a form containing a select tag:
+   `[select* recipient id:recipient "John Doe|jondoe@example.org" "Max Mustermann|maxmustermann@example.org"]`
+1. Set Mail option "To:" to `[recipient]` 
+1. Add the following code into the form as well:
+   `<script type="text/javascript">
+function wpcf7_update_select()
+{
+  var value = decodeURIComponent(window.location.hash.substring(1).replace(/\+/g, '%20'));
+  jQuery('#recipient').val(value);
+}
+jQuery(document).ready(function() {
+  wpcf7_update_select();
+  jQuery('.wpcf7-form').bind('reset', wpcf7_update_select);
+});
+</script>`
+1. Test it: Add this contact form to a page or post, and call it with #Max+Mustermann at the end. Max Mustermann should be pre-selected now.
+1. Install and Activate this plugin
+1. Configure the paremeters: 
+  * The URL where the contact form resides (e.g. '/contact/')
+  * An optional prefix to the title attribute that will get created.
 
 == Frequently Asked Questions ==
 
@@ -53,54 +78,19 @@ e.g.
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the directory of the stable readme.txt, so in this case, `/tags/4.3/screenshot-1.png` (or jpg, jpeg, gif)
-2. This is the second screen shot
+1. Form in action
+2. Editor Button
+3. Parameters
 
 == Changelog ==
 
-= 1.0 =
-* A change since the previous version.
-* Another change.
+= 0.2 =
+* Add German translation
 
-= 0.5 =
-* List versions from most recent at top to oldest at bottom.
+= 0.1 =
+* First version
 
-== Upgrade Notice ==
+== TO DO ==
 
-= 1.0 =
-Upgrade notices describe the reason a user should upgrade.  No more than 300 characters.
-
-= 0.5 =
-This version fixes a security related bug.  Upgrade immediately.
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation."  Arbitrary sections will be shown below the built-in sections outlined above.
-
-== A brief Markdown Example ==
-
-Ordered list:
-
-1. Some feature
-1. Another feature
-1. Something else about the plugin
-
-Unordered list:
-
-* something
-* something else
-* third thing
-
-Here's a link to [WordPress](http://wordpress.org/ "Your favorite software") and one to [Markdown's Syntax Documentation][markdown syntax].
-Titles are optional, naturally.
-
-[markdown syntax]: http://daringfireball.net/projects/markdown/syntax
-            "Markdown is what the parser uses to process much of the readme file"
-
-Markdown uses email style notation for blockquotes and I've been told:
-> Asterisks for *emphasis*. Double it up  for **strong**.
-
-`<?php code(); // goes in backticks ?>`
+* Currently, only one form can be used
+* Add script to the plugin, instead of adding it in the contact form? So as to be able to update it?
