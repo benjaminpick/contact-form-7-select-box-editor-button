@@ -137,7 +137,6 @@ function updateEmail()
             <td nowrap="nowrap"></td>
             <td>
             	<?php echo str_replace("[", '<a href="/wp-admin/admin.php?page=wpcf7" target="_top">', str_replace(']', '</a>', __('New Contacts can be added in the [contact form menu].', 'contact-form-7-select-box-editor-button'))); ?>
-            	Neue Kontakte können unter dem [Menüpunkt Formular] hinzugefügt werden.
             </td>
           </tr>
         </table>
