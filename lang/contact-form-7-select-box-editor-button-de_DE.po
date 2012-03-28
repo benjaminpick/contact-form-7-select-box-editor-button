@@ -1,0 +1,113 @@
+# Copyright (C) 2012 Contact Form 7 Select Box Editor Button
+# This file is distributed under the same license as the Contact Form 7 Select Box Editor Button package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Contact Form 7 Select Box Editor Button 0.1\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/contact-form-7-select-box-editor-button\n"
+"POT-Creation-Date: 2012-03-28 09:08:48+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2012-03-28 11:15+0100\n"
+"Last-Translator: Benjamin\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: admin_options.php:7
+msgid "Parameters saved."
+msgstr "Parameter gespeichert."
+
+#. #-#-#-#-#  plugin.pot (Contact Form 7 Select Box Editor Button 0.1)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: admin_options.php:10
+#: contact-form-7-select-box-editor-button.php:143
+msgid "Contact Form 7 Select Box Editor Button"
+msgstr "Contact Form 7 Select Box Editor Button"
+
+#: admin_options.php:13
+msgid "Parameters:"
+msgstr "Parameter:"
+
+#: admin_options.php:19
+msgid "URL to contact form:"
+msgstr "Link zum Kontaktformular:"
+
+#: admin_options.php:27
+msgid "Prefix to title attribute"
+msgstr "Präfix für das title-Attribut"
+
+#: admin_options.php:34
+msgid "Save Parameters"
+msgstr "Speichern"
+
+#: admin_options.php:38
+msgid "First steps"
+msgstr "Erste Schritte"
+
+#: admin_options.php:39
+msgid "SELECT_BOX_EXPLANATION"
+msgstr ""
+
+#: contact-form-7-select-box-editor-button.php:104
+msgid "You are not allowed to be here"
+msgstr "Keine Rechte!"
+
+#: contact-form-7-select-box-editor-button.php:143
+msgid "Contact Form Editor Button"
+msgstr "Kontaktformular Knopf"
+
+#: tinymce/window.php:12
+msgid "Add Contact Form Link"
+msgstr "Füge ein Kontakt-Link hinzu"
+
+#: tinymce/window.php:44
+msgid "Contact not found, no edit mode."
+msgstr "Kontakt wurde nicht gefunden, kann diesen Link nicht bearbeiten."
+
+#: tinymce/window.php:88
+msgid "Link text may not be empty!"
+msgstr "Der Link-Text darf nicht leer sein!"
+
+#: tinymce/window.php:115
+msgid "Contact"
+msgstr "Kontakt"
+
+#: tinymce/window.php:125
+msgid "Email Adress"
+msgstr "Email-Adresse"
+
+#: tinymce/window.php:131
+msgid "Link Text"
+msgstr "Link-Text"
+
+#: tinymce/window.php:133
+msgid "E-Mail"
+msgstr "E-Mail"
+
+#: tinymce/window.php:139
+msgid "New Contacts can be added in the [contact form menu]."
+msgstr "Neue Kontakte können unter dem [Menüpunkt Formular] hinzugefügt werden."
+
+#: tinymce/window.php:149
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: tinymce/window.php:153
+msgid "Insert"
+msgstr "Einfügen"
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/benjamin4ruby/wp-contact-form-7-select-box-editor-button"
+msgstr "https://github.com/benjamin4ruby/wp-contact-form-7-select-box-editor-button"
+
+#. Description of the plugin/theme
+msgid "Add a contact form link into article text. For contact forms where the recipient can be chosen in a select box."
+msgstr "Füge einen Link zum Kontaktformular in den Artikeltext ein. Für Kontaktformular, in denen der Empfänger über eine select-box ausgewählt werden kann."
+
+#. Author of the plugin/theme
+msgid "Benjamin"
+msgstr "Benjamin"
+
+#. Author URI of the plugin/theme
+msgid "https://github.com/benjamin4ruby"
+msgstr "https://github.com/benjamin4ruby"
+
