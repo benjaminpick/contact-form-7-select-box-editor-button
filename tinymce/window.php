@@ -26,7 +26,11 @@ var rawData = <?php echo json_encode($adresses); ?>;
 var AddLinkDialog = {
 	local_ed : 'ed',
 	
-	init: function(ed) { AddLinkDialog.local_ed = ed; tinyMCEPopup.resizeToInnerSize(); this._initForm(); },
+	init: function(ed) {
+		AddLinkDialog.local_ed = ed;
+		tinyMCEPopup.resizeToInnerSize();
+		this._initForm();
+	},
 
 	_fillForm: function() {
 		var parentNodeRaw = this.local_ed.selection.getNode();

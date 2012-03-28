@@ -3,7 +3,7 @@
 Plugin Name: Contact Form 7 Select Box Editor Button
 Plugin URI: https://github.com/benjamin4ruby/wp-contact-form-7-select-box-editor-button
 Description: Add a contact form link into article text. For contact forms where the recipient can be chosen in a select box.
-Version: 0.2
+Version: 0.2.1
 Author: Benjamin
 Author URI: https://github.com/benjamin4ruby
 */
@@ -180,7 +180,7 @@ function contact_form_7_select_box_editor_button_option_page()
 		else
 			$error_msg = '';
 
-		$error_msg .= __('Contact Link Prefix is required!', 'contact-form-7-select-box-editor-button');
+		$error_msg .= __('URL of contact form is required!', 'contact-form-7-select-box-editor-button');
 	}
 	include('admin_options.php');
 }

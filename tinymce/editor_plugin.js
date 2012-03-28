@@ -29,7 +29,7 @@
 
 			// Register button
 			ed.addButton('addContactForm7Link', {
-				title : 'Kontaktlink hinzufügen',
+				title : 'Add contact link',
 				cmd : 'mceAddContactForm7Link',
 				image : url + '/addLink.gif'
 			});
@@ -62,11 +62,11 @@
 		 */
 		getInfo : function() {
 			return {
-				longname : 'Add Contact Form 7 Link',
-				author : 'Benjamin Pick',
-				authorurl : '???',
-				infourl : '???',
-				version : "1.0"
+				longname : 'Contact Form 7 Select Box Editor Button',
+				author : 'Benjamin',
+				authorurl : 'https://github.com/benjamin4ruby',
+				infourl : 'http://wordpress.org/extend/plugins/contact-form-7-select-box-editor-button/',
+				version : "0.1"
 			};
 		}
 	});

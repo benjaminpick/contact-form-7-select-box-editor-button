@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2012-03-28 11:15+0100\n"
+"PO-Revision-Date: 2012-03-28 15:56+0100\n"
 "Last-Translator: Benjamin\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
@@ -110,4 +110,16 @@ msgstr "Benjamin"
 #. Author URI of the plugin/theme
 msgid "https://github.com/benjamin4ruby"
 msgstr "https://github.com/benjamin4ruby"
+
+#: contact-form-7-select-box-editor-button.php:96
+msgid "No Contact Form found."
+msgstr "Kein Kontaktformular gefunden"
+
+#: contact-form-7-select-box-editor-button.php:183
+msgid "URL of contact form is required!"
+msgstr "URL der Kontaktform muss ausgefüllt werden."
+
+#: tinymce/window.php:124
+msgid "Error: There are no contacts to choose from."
+msgstr "Fehler: Keine Kontakte gefunden, die man auswählen kann."
 
