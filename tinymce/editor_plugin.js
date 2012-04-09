@@ -3,7 +3,7 @@
 	// TODO http://javascriptcompressor.com/
 	
 	// Load plugin specific language pack
-	//tinymce.PluginManager.requireLangPack('addContactForm7Link');
+	tinymce.PluginManager.requireLangPack('addContactForm7Link');
 
 	tinymce.create('tinymce.plugins.addContactForm7Link', {
 		/**
@@ -18,8 +18,8 @@
 			ed.addCommand('mceAddContactForm7Link', function() {
 				ed.windowManager.open({
 					file : ajaxurl + '?action=addContactForm7Link_tinymce',
-					width : 330 + ed.getLang('addContactForm7Link.delta_width', 0),
-					height : 195 + ed.getLang('addContactForm7Link.delta_height', 0),
+					width : 330 + ed.getLang('AddContactForm7Link.delta_width', 0),
+					height : 195 + ed.getLang('AddContactForm7Link.delta_height', 0),
 					inline : 1
 				}, {
 					plugin_url : url, // Plugin absolute URL
@@ -29,7 +29,7 @@
 
 			// Register button
 			ed.addButton('addContactForm7Link', {
-				title : 'Add contact link',
+				title : ed.getLang('AddContactForm7Link.desc', 'Add contact link (default)'),
 				cmd : 'mceAddContactForm7Link',
 				image : url + '/addLink.gif'
 			});

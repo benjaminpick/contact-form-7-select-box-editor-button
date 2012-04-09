@@ -11,17 +11,21 @@ For contact forms where the recipient can be chosen in a select box.
 == Description ==
 
 Ever wanted to use one contact form for all your contacts? Yet be able to link to a specific contact?
-And without modifying 
+And without modifying the ''Contact Form 7'' extension?
 
-Links:
+This little extension guides you to set up ''Contact Form 7'', enter the contacts there, and then adds an editor button by which you can link a specific contact form.
+
+**Features:**
+
+* Email adresses are invisible to website visitors (no spam)
+* Adds Editor Button to add or modify links to a contact form
+* Contact form links can by styled by CSS
+
+**Links:**
 
 * Contact Form 7 (required): http://wordpress.org/extend/plugins/contact-form-7/
 
 == Installation ==
-
-This section describes how to install the plugin and get it working.
-
-e.g.
 
 1. Install Contact Form 7 first
 1. Create a form containing a select tag:
@@ -41,15 +45,15 @@ jQuery(document).ready(function() {
 </script>`
 1. Test it: Add this contact form to a page or post, and call it with #Max+Mustermann at the end. Max Mustermann should be pre-selected now.
 1. Install and Activate this plugin
-1. Configure the paremeters: 
+1. Configure the parameters: 
   * The URL where the contact form resides (e.g. '/contact/')
   * An optional prefix to the title attribute that will get created.
 
 == Frequently Asked Questions ==
 
-= (Your Question here) =
+= Can I contribute bugfixes or new features to this extension? =
 
-(My answer :-)
+Of course, be welcome! Send me a pull request at (Github)[https://github.com/benjamin4ruby/wp-contact-form-7-select-box-editor-button].
 
 == Screenshots ==
 
@@ -73,5 +77,6 @@ jQuery(document).ready(function() {
 
 == TO DO ==
 
-* Currently, only one form can be used
+* Currently, only one form can be used (let me know if this isn't enough!)
+* The URL could be detected (find all articles containing a contact form, and propose them in a select box)
 * Add script to the plugin, instead of adding it in the contact form? So as to be able to update it?
