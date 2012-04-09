@@ -67,6 +67,8 @@ Of course, be welcome! Send me a pull request at [Github](https://github.com/ben
 
 == Changelog ==
 
+= 
+* Performance: Compressed JS files 
 
 = 0.2.2 =
 * De: Fix button title
