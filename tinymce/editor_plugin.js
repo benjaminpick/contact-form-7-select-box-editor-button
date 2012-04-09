@@ -63,7 +63,7 @@
 		getInfo : function() {
 			return {
 				longname : 'Contact Form 7 Select Box Editor Button',
-				author : 'Benjamin',
+				author : 'Benjamin Pick',
 				authorurl : 'https://github.com/benjamin4ruby',
 				infourl : 'http://wordpress.org/extend/plugins/contact-form-7-select-box-editor-button/',
 				version : "0.1"

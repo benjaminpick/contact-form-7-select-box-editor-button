@@ -11,9 +11,9 @@ For contact forms where the recipient can be chosen in a select box.
 == Description ==
 
 Ever wanted to use one contact form for all your contacts? Yet be able to link to a specific contact?
-And without modifying the ''Contact Form 7'' extension?
+And without modifying the *Contact Form 7* extension?
 
-This little extension guides you to set up ''Contact Form 7'', enter the contacts there, and then adds an editor button by which you can link a specific contact form.
+This little extension guides you to set up *Contact Form 7*, enter the contacts there, and then adds an editor button by which you can link a specific contact form.
 
 **Features:**
 
@@ -27,11 +27,14 @@ This little extension guides you to set up ''Contact Form 7'', enter the contact
 
 == Installation ==
 
-1. Install Contact Form 7 first
+1. Install *Contact Form 7* first
 1. Create a form containing a select tag:
+
    `[select* recipient id:recipient "John Doe|jondoe@example.org" "Max Mustermann|maxmustermann@example.org"]`
+
 1. Set Mail option "To:" to `[recipient]` 
 1. Add the following code into the form as well:
+
    `<script type="text/javascript">
 function wpcf7_update_select()
 {
@@ -43,17 +46,18 @@ jQuery(document).ready(function() {
   jQuery('.wpcf7-form').bind('reset', wpcf7_update_select);
 });
 </script>`
-1. Test it: Add this contact form to a page or post, and call it with #Max+Mustermann at the end. Max Mustermann should be pre-selected now.
+
+1. Test it: Add this contact form to a page or post, and call it with `#Max+Mustermann` at the end. "Max Mustermann" should be pre-selected now.
 1. Install and Activate this plugin
 1. Configure the parameters: 
-  * The URL where the contact form resides (e.g. '/contact/')
+  * The URL where the contact form resides (e.g. `/contact/`)
   * An optional prefix to the title attribute that will get created.
 
 == Frequently Asked Questions ==
 
 = Can I contribute bugfixes or new features to this extension? =
 
-Of course, be welcome! Send me a pull request at (Github)[https://github.com/benjamin4ruby/wp-contact-form-7-select-box-editor-button].
+Of course, be welcome! Send me a pull request at [Github](https://github.com/benjamin4ruby/wp-contact-form-7-select-box-editor-button).
 
 == Screenshots ==
 
