@@ -3,7 +3,7 @@ Contributors: benjamin4
 Tags: tinymce, button, contact form, 
 Requires at least: 3.2
 Tested up to: 3.3.1
-Stable tag: 0.2.1
+Stable tag: 0.2.2
 
 Add a contact form link into article text.
 For contact forms where the recipient can be chosen in a select box.
@@ -62,6 +62,10 @@ Of course, be welcome! Send me a pull request at (Github)[https://github.com/ben
 3. Parameters
 
 == Changelog ==
+
+
+= 0.2.2 =
+* De: Fix button title
 
 = 0.2.1 =
 * Updated lang/de
