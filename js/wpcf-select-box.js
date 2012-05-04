@@ -3,7 +3,6 @@
 
 function wpcf7_update_select()
 {
-  alert('do!');
   var hash = window.location.hash;
   var value = decodeURIComponent(hash.substring(1).replace(/\+/g, '%20'));
   jQuery('#recipient').val(value);

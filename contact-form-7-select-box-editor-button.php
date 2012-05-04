@@ -3,7 +3,7 @@
 Plugin Name: Contact Form 7 Select Box Editor Button
 Plugin URI: https://github.com/benjaminpick/wp-contact-form-7-select-box-editor-button
 Description: Add a contact form link into article text. For contact forms where the recipient can be chosen in a select box.
-Version: 0.2.3
+Version: 0.3
 Author: Benjamin Pick
 Author URI: https://github.com/benjaminpick
 License: GPLv2 or later

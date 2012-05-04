@@ -3,7 +3,7 @@ Contributors: benjamin4
 Tags: tinymce, button, contact form, 
 Requires at least: 3.2
 Tested up to: 3.4
-Stable tag: 0.2.3
+Stable tag: 0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -61,6 +61,9 @@ so you should remove it from your contact form itself.
 (For this version, the JS code wasn't modified, so it should continue to work if you don't.)
 
 == Changelog ==
+
+= 0.3 =
+* Also handle links that are on the same page as the contact form 
 
 = 0.2.3 =
 * Performance: Compressed JS files
