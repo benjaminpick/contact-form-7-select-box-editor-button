@@ -1,15 +1,38 @@
 <?php
 /*
 Plugin Name: Contact Form 7 Select Box Editor Button
-Plugin URI: https://github.com/benjamin4ruby/wp-contact-form-7-select-box-editor-button
+Plugin URI: https://github.com/benjaminpick/wp-contact-form-7-select-box-editor-button
 Description: Add a contact form link into article text. For contact forms where the recipient can be chosen in a select box.
-Version: 0.2.2
+Version: 0.2.3
 Author: Benjamin Pick
-Author URI: https://github.com/benjamin4ruby
+Author URI: https://github.com/benjaminpick
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
+/***************************************************************************
+
+Copyright: Benjamin Pick, 2012
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+The license is also available at http://www.gnu.org/copyleft/gpl.html
+
+**************************************************************************/
+
+define ('CONTACT_FORM_7_SELECT_BOX_EDITOR_BUTTON_VERSION', '0.2.3');
 
 load_plugin_textdomain('contact-form-7-select-box-editor-button', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/');
-
 if(!function_exists('_log')){
   function _log( $message ) {
     if( WP_DEBUG === true ){
@@ -186,4 +209,12 @@ function contact_form_7_select_box_editor_button_option_page()
 }
 
 // init process for button control
-add_action('init', 'contact_form_7_link_addbuttons');
+add_action('admin_init', 'contact_form_7_link_addbuttons');
+
+function contact_form_7_select_box_editor_button_init_frontend() {
+  // TODO: Only do if a contact form is shown?
+  wp_enqueue_script('jquery');
+  wp_enqueue_script('contact_form_7_select_box_editor_button_init', plugins_url('/js/wpcf-select-box.js',__FILE__), array('jquery'), CONTACT_FORM_7_SELECT_BOX_EDITOR_BUTTON_VERSION);
+}
+add_action('init','contact_form_7_select_box_editor_button_init_frontend');
+

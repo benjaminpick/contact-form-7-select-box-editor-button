@@ -2,8 +2,10 @@
 Contributors: benjamin4
 Tags: tinymce, button, contact form, 
 Requires at least: 3.2
-Tested up to: 3.3.1
-Stable tag: 0.2.2
+Tested up to: 3.4
+Stable tag: 0.2.3
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Add a contact form link into article text.
 For contact forms where the recipient can be chosen in a select box.
@@ -33,20 +35,6 @@ This little extension guides you to set up *Contact Form 7*, enter the contacts 
    `[select* recipient id:recipient "John Doe|jondoe@example.org" "Max Mustermann|maxmustermann@example.org"]`
 
 1. Set Mail option "To:" to `[recipient]` 
-1. Add the following code into the form as well:
-
-   `<script type="text/javascript">
-function wpcf7_update_select()
-{
-  var value = decodeURIComponent(window.location.hash.substring(1).replace(/\+/g, '%20'));
-  jQuery('#recipient').val(value);
-}
-jQuery(document).ready(function() {
-  wpcf7_update_select();
-  jQuery('.wpcf7-form').bind('reset', wpcf7_update_select);
-});
-</script>`
-
 1. Test it: Add this contact form to a page or post, and call it with `#Max+Mustermann` at the end. "Max Mustermann" should be pre-selected now.
 1. Install and Activate this plugin
 1. Configure the parameters: 
@@ -57,7 +45,7 @@ jQuery(document).ready(function() {
 
 = Can I contribute bugfixes or new features to this extension? =
 
-Of course, be welcome! Send me a pull request at [Github](https://github.com/benjamin4ruby/wp-contact-form-7-select-box-editor-button).
+Of course, be welcome! Send me a pull request at [Github](https://github.com/benjaminpick/wp-contact-form-7-select-box-editor-button).
 
 == Screenshots ==
 
@@ -65,10 +53,19 @@ Of course, be welcome! Send me a pull request at [Github](https://github.com/ben
 2. Editor Button
 3. Parameters
 
+== Upgrade Notice ==
+
+= 0.2.3 =
+The Frontend Javascript code was added to the plugin itself,
+so you should remove it from your contact form itself.
+(For this version, the JS code wasn't modified, so it should continue to work if you don't.)
+
 == Changelog ==
 
-= 
-* Performance: Compressed JS files 
+= 0.2.3 =
+* Performance: Compressed JS files
+* Frontend JS Code is added by plugin
+* Add Install Instruction to admin page
 
 = 0.2.2 =
 * De: Fix button title
