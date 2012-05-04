@@ -37,6 +37,7 @@ echo "Versions match in readme.txt and PHP file. Let's proceed..."
 
 echo "Compressing JS files..."
 java -jar ~/bin/yuicompressor.jar --nomunge --preserve-semi -o "$GITPATH/tinymce/editor_plugin.js" $GITPATH/tinymce/editor_plugin_src.js
+#java -jar ~/bin/yuicompressor.jar --nomunge --preserve-semi -o "$GITPATH/tinymce/wpcf-select-box.js" $GITPATH/tinymce/wpcf-select-box_src.js
 
 cd $GITPATH
 echo -e "Enter a commit message for this new version: \c"
