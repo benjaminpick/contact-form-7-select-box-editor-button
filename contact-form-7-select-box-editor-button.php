@@ -30,7 +30,7 @@ The license is also available at http://www.gnu.org/copyleft/gpl.html
 
 **************************************************************************/
 
-define ('CONTACT_FORM_7_SELECT_BOX_EDITOR_BUTTON_VERSION', '0.2.3');
+define('CONTACT_FORM_7_SELECT_BOX_EDITOR_BUTTON_VERSION', '0.3.1');
 
 load_plugin_textdomain('contact-form-7-select-box-editor-button', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/');
 if(!function_exists('_log')){
