@@ -8,14 +8,19 @@ function wpcf7_update_select()
   jQuery('#recipient').val(value);
 }
 
-jQuery(document).ready(function() {
-  var form = jQuery('.wpcf7-form');
+jQuery(document).ready(function($) {
+  var form = $('.wpcf7-form');
   
-  // Do it when contact form is reset (after succesful submit) (not working yet)
-  form.bind('reset', wpcf7_update_select);
+  // Do it when contact form is reset (after succesful submit)
+  form.bind('reset',  /* wpcf7_update_select */ function() {
+	  // Workaround until this is fixed: http://wordpress.org/support/topic/plugin-contact-form-7-trigger-jquery-event
+	  setTimeout(function() {
+		  wpcf7_update_select();
+	  }, 50);
+  });
 
   // Do it when hash changes (Link from same page, doesn't trigger ready again)
-  jQuery(window).hashchange(wpcf7_update_select);
+  $(window).hashchange(wpcf7_update_select);
   
   // Do it no!
   wpcf7_update_select();

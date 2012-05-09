@@ -63,7 +63,8 @@ so you should remove it from your contact form itself.
 == Changelog ==
 
 = 0.3 =
-* Also handle links that are on the same page as the contact form 
+* Feature: Also handle links that are on the same page as the contact form
+* Fix: Correctly reset select box after succesful submit
 
 = 0.2.3 =
 * Performance: Compressed JS files
@@ -89,5 +90,5 @@ so you should remove it from your contact form itself.
 
 * Currently, only one form can be used (let me know if this isn't enough!)
 * The URL could be detected (find all articles containing a contact form, and propose them in a select box)
-* Add script to the plugin, instead of adding it in the contact form? So as to be able to update it?
 * When change URL Prefix, at least show a warning that the links need to be updated (load, insert).
+* When clicking on a link that has the form on the same page, should it scroll to the form?
