@@ -2,8 +2,8 @@
 Contributors: benjamin4
 Tags: tinymce, button, contact form, 
 Requires at least: 3.2
-Tested up to: 3.4
-Stable tag: 0.3
+Tested up to: 3.4.1
+Stable tag: 0.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,8 +20,9 @@ This little extension guides you to set up *Contact Form 7*, enter the contacts 
 **Features:**
 
 * Email adresses are invisible to website visitors (no spam)
-* Adds Editor Button to add or modify links to a contact form
+* Adds Editor Button to the admin area where links to a contact form can be added or modified
 * Contact form links can by styled by CSS
+* Translation to German
 
 **Links:**
 
@@ -35,8 +36,8 @@ This little extension guides you to set up *Contact Form 7*, enter the contacts 
    `[select* recipient id:recipient "John Doe|jondoe@example.org" "Max Mustermann|maxmustermann@example.org"]`
 
 1. Set Mail option "To:" to `[recipient]` 
-1. Test it: Add this contact form to a page or post, and call it with `#Max+Mustermann` at the end. "Max Mustermann" should be pre-selected now.
 1. Install and Activate this plugin
+1. Test it: Add this contact form to a page or post, and call it with `#Max+Mustermann` at the end. "Max Mustermann" should be pre-selected now.
 1. Configure the parameters: 
   * The URL where the contact form resides (e.g. `/contact/`)
   * An optional prefix to the title attribute that will get created.
@@ -61,6 +62,9 @@ so you should remove it from your contact form itself.
 (For this version, the JS code wasn't modified, so it should continue to work if you don't.)
 
 == Changelog ==
+
+= 0.3.1 =
+* Fix: Avoid empty select boxes (when contact form is called with empty or invalid hashtag, and form was submitted)
 
 = 0.3 =
 * Feature: Also handle links that are on the same page as the contact form

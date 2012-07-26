@@ -6,6 +6,11 @@ function wpcf7_update_select()
   var hash = window.location.hash;
   var value = decodeURIComponent(hash.substring(1).replace(/\+/g, '%20'));
   jQuery('#recipient').val(value);
+  
+  jQuery('.wpcf7-form select').each(function() {
+	 if (this.selectedIndex == -1)
+		 this.selectedIndex = 0;
+  });
 }
 
 jQuery(document).ready(function($) {
