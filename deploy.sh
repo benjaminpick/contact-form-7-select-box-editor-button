@@ -50,7 +50,7 @@ echo "Tagging new version in git"
 git tag -a "$NEWVERSION1" -m "Tagging version $NEWVERSION1"
 
 echo "Pushing latest commit to origin, with tags"
-git push origin master
+git push origin --all
 git push origin master --tags
 
 echo 
