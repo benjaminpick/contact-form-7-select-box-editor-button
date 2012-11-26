@@ -1,9 +1,9 @@
 === Contact Form 7 Select Box Editor Button ===
 Contributors: benjamin4
 Tags: tinymce, button, contact form, 
-Requires at least: 3.2
-Tested up to: 3.4.1
-Stable tag: 0.3.1
+Requires at least: 3.3
+Tested up to: 3.5
+Stable tag: 0.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -56,12 +56,18 @@ Of course, be welcome! Send me a pull request at [Github](https://github.com/ben
 
 == Upgrade Notice ==
 
+= 0.3.2 =
+If upgrading this plugin, you should also upgrade Contact Form 7 to at least v3.3.
+
 = 0.2.3 =
 The Frontend Javascript code was added to the plugin itself,
 so you should remove it from your contact form itself.
 (For this version, the JS code wasn't modified, so it should continue to work if you don't.)
 
 == Changelog ==
+
+= 0.3.2 =
+* Fix: Recipient is now the same as before submit.
 
 = 0.3.1 =
 * Fix: Avoid empty select boxes (when contact form is called with empty or invalid hashtag, and form was submitted)
