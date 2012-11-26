@@ -12,7 +12,7 @@ MAINFILE="contact-form-7-select-box-editor-button.php" # this should be the name
 GITPATH="$CURRENTDIR/" # this file should be in the base of your git repository
 
 # svn config
-SVNPATH="/mnt/tmpfs/$PLUGINSLUG" # path to a temp SVN repo. No trailing slash required and don't add trunk.
+SVNPATH="/tmp/$PLUGINSLUG" # path to a temp SVN repo. No trailing slash required and don't add trunk.
 SVNURL="http://plugins.svn.wordpress.org/contact-form-7-select-box-editor-button/" # Remote SVN repo on wordpress.org, with no trailing slash
 SVNUSER="benjamin4" # your svn username
 
