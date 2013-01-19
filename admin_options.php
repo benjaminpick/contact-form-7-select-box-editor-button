@@ -58,7 +58,7 @@
 			<?php _e('Insert the post\'s URL above, and then you can edit a page and insert a Link to the contact form of Max Mustermann by clicking the envelope button of the editor.', 'contact-form-7-select-box-editor-button'); ?>
 		</li>
 		<li>
-			<?php _e('That\'s it! You can give feedback in the <a href="http://wordpress.org/tags/contact-form-7-select-box-editor-button?forum_id=10" target="_blank">Wordpress Forum</a> or file a bug report at <a href="https://github.com/benjaminpick/wp-contact-form-7-select-box-editor-button" target="_blank">github</a>', 'contact-form-7-select-box-editor-button'); ?>
+			<?php _e('That\'s it! You can give feedback in the <a href="http://wordpress.org/support/plugin/contact-form-7-select-box-editor-button" target="_blank">Wordpress Forum</a> or file a bug report at <a href="https://github.com/benjaminpick/wp-contact-form-7-select-box-editor-button" target="_blank">github</a>', 'contact-form-7-select-box-editor-button'); ?>
 		</li>
 	</ol>
 </div>
