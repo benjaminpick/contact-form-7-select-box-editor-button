@@ -3,7 +3,7 @@
 Plugin Name: Contact Form 7 Select Box Editor Button
 Plugin URI: https://github.com/benjaminpick/wp-contact-form-7-select-box-editor-button
 Description: Add a contact form link into article text. For contact forms where the recipient can be chosen in a select box.
-Version: 0.3.2
+Version: 0.3.3
 Author: Benjamin Pick
 Author URI: https://github.com/benjaminpick
 License: GPLv2 or later
@@ -30,7 +30,7 @@ The license is also available at http://www.gnu.org/copyleft/gpl.html
 
 **************************************************************************/
 
-define('CONTACT_FORM_7_SELECT_BOX_EDITOR_BUTTON_VERSION', '0.3.2');
+define('CONTACT_FORM_7_SELECT_BOX_EDITOR_BUTTON_VERSION', '0.3.3');
 
 load_plugin_textdomain('contact-form-7-select-box-editor-button', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/');
 if(!function_exists('_log')){
@@ -73,7 +73,7 @@ class AddContactForm7Link
 		if ($res == 0)
 			return _log('No select box found.');
 
-		$id = $matches[1]; // Currently hardcoded to #recipient
+		$id = $matches[1]; // Currently hardcoded to #recipient : TODO Show error if not present or different id
 		$adresses = $matches[2];
 		
 		preg_match_all('/"([^"|]+)\|([^"|]+@[^"|]+)"/', $adresses, $matches, PREG_SET_ORDER);
@@ -101,7 +101,7 @@ class AddContactForm7Link
 			'numberposts' => -1,
 			'orderby' => 'ID',
 			'order' => 'ASC',
-			'post_type' => 'wpcf7_contact_form' ) );
+			'post_type' => 'wpcf7_contact_form' ) ); // TODO -> select box for options?
 		
 		$first = reset($contact_forms);
 		
@@ -142,7 +142,7 @@ function contact_form_7_link_ajax() {
     	die(__("You are not allowed to be here"));
 
     $plugin = new AddContactForm7Link();
-    $id = $plugin->getFirstContactFormId();
+    $id = $plugin->getFirstContactFormId(); // TODO get from option
 	$adresses = $plugin->get_available_adresses($id);
     	
 	// TODO: pre-select select adress (js or GET) from current selection; get Link-Text
