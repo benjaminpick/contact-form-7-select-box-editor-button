@@ -118,10 +118,24 @@ function updateEmail()
 <body id="link">
 	<form action="#">
 	
-	<div class="panel_wrapper">
+	<div class="panel_wrapper" style="height:150px;">
 		<div id="gallery_panel" class="panel current">
 		<table border="0" cellpadding="4" cellspacing="0">
          <tr>
+            <td nowrap="nowrap"><label for="selectforms"><?php _e("Form", 'contact-form-7-select-box-editor-button'); ?></label></td>
+            <td>
+<?php if (!is_array($forms) || empty($forms)) : ?>
+				<?php _e('Error: There are no forms to choose from.', 'contact-form-7-select-box-editor-button')?>
+<?php else: ?>
+				<select id="selectforms" name="form">
+<?php   foreach ($forms as $id => $form) : ?>
+					<option value="<?php echo esc_attr($form->ID); ?>"><?php echo esc_html($form->post_title); ?></option>
+<?php   endforeach; ?>
+				</select>
+<?php endif; ?>
+            </td>
+          </tr>
+		<tr>
             <td nowrap="nowrap"><label for="contactlink"><?php _e("Contact", 'contact-form-7-select-box-editor-button'); ?></label></td>
             <td>
 <?php if (!is_array($adresses) || empty($adresses)) : ?>
@@ -154,6 +168,7 @@ function updateEmail()
             </td>
           </tr>
         </table>
+        <br />
 		</div>
 	</div>
 

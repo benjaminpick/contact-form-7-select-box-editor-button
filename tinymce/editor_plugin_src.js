@@ -19,7 +19,7 @@
 				ed.windowManager.open({
 					file : ajaxurl + '?action=addContactForm7Link_tinymce',
 					width : 330 + ed.getLang('AddContactForm7Link.delta_width', 0),
-					height : 195 + ed.getLang('AddContactForm7Link.delta_height', 0),
+					height : 215 + ed.getLang('AddContactForm7Link.delta_height', 0),
 					inline : 1
 				}, {
 					plugin_url : url, // Plugin absolute URL

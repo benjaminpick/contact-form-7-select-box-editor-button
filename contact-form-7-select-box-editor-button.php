@@ -33,6 +33,7 @@ The license is also available at http://www.gnu.org/copyleft/gpl.html
 define('CONTACT_FORM_7_SELECT_BOX_EDITOR_BUTTON_VERSION', '0.3.3');
 
 load_plugin_textdomain('contact-form-7-select-box-editor-button', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/');
+
 if(!function_exists('_log')){
   function _log( $message ) {
     if( WP_DEBUG === true ){
@@ -52,8 +53,6 @@ class AddContactForm7Link
 	 * Get email Adresses from a select recipient box
 	 * with form id $id.
 	 *
-	 *
-	 * Enter description here ...
 	 * @param int $id	Id of Form
 	 * @return array(url-hash => label)
 	 */
@@ -95,15 +94,24 @@ class AddContactForm7Link
 		return $ret;
 	}
 	
-	public function getFirstContactFormId()
+	public function getAllForms()
 	{
 		$contact_forms = get_posts( array(
-			'numberposts' => -1,
-			'orderby' => 'ID',
-			'order' => 'ASC',
-			'post_type' => 'wpcf7_contact_form' ) ); // TODO -> select box for options?
-		
-		$first = reset($contact_forms);
+				'numberposts' => -1,
+				'orderby' => 'ID',
+				'order' => 'ASC',
+				'post_type' => 'wpcf7_contact_form' ) ); // TODO -> select box for options?
+		_log($contact_forms);
+		return $contact_forms;
+	}
+
+	/**
+	 * @deprecated Use getAllForms()
+	 * @return int Id of first form
+	 */
+	public function getFirstContactFormId()
+	{
+		$first = reset($this->getAllForms());
 		
 		if ($first)
 			return $first->ID;
@@ -142,6 +150,7 @@ function contact_form_7_link_ajax() {
     	die(__("You are not allowed to be here"));
 
     $plugin = new AddContactForm7Link();
+    $forms = $plugin->getAllForms();
     $id = $plugin->getFirstContactFormId(); // TODO get from option
 	$adresses = $plugin->get_available_adresses($id);
     	
