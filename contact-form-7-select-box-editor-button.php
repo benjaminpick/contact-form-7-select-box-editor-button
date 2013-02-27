@@ -172,13 +172,13 @@ function register_contact_form_7_link_button($buttons) {
  
 // Load the TinyMCE plugin : editor_plugin.js (wp2.5)
 function add_contact_form_7_link_tinymce_plugin($plugin_array) {
-   $plugin_array['addContactForm7Link'] = WP_PLUGIN_URL.'/contact-form-7-select-box-editor-button/tinymce/editor_plugin.js';
+   $plugin_array['addContactForm7Link'] = WP_PLUGIN_URL.'/contact-form-7-select-box-editor-button/tinymce/editor_plugin' . (WP_DEBUG ? '_src' : '') .  '.js';
    return $plugin_array;
 }
  
 function contact_form_7_select_box_editor_button_admin_menu($not_used){
     // place the info in the plugin settings page
-		add_options_page(__('Contact Form 7 Select Box Editor Button', 'contact-form-7-select-box-editor-button'), __('Contact Form Editor Button', 'contact-form-7-select-box-editor-button'), 5, basename(__FILE__), 'contact_form_7_select_box_editor_button_option_page');
+		add_options_page(__('Contact Form 7 Select Box Editor Button', 'contact-form-7-select-box-editor-button'), __('Contact Form Editor Button', 'contact-form-7-select-box-editor-button'), 'edit_posts', basename(__FILE__), 'contact_form_7_select_box_editor_button_option_page');
 }
 add_action('admin_menu', 'contact_form_7_select_box_editor_button_admin_menu');
 
