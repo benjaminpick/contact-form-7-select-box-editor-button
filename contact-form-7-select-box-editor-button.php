@@ -178,7 +178,7 @@ function add_contact_form_7_link_tinymce_plugin($plugin_array) {
  
 function contact_form_7_select_box_editor_button_admin_menu($not_used){
     // place the info in the plugin settings page
-		add_options_page(__('Contact Form 7 Select Box Editor Button', 'contact-form-7-select-box-editor-button'), __('Contact Form Editor Button', 'contact-form-7-select-box-editor-button'), 'edit_posts', basename(__FILE__), 'contact_form_7_select_box_editor_button_option_page');
+		add_options_page(__('Contact Form 7 Select Box Editor Button', 'contact-form-7-select-box-editor-button'), __('Contact Form Editor Button', 'contact-form-7-select-box-editor-button'), 'manage_options', basename(__FILE__), 'contact_form_7_select_box_editor_button_option_page');
 }
 add_action('admin_menu', 'contact_form_7_select_box_editor_button_admin_menu');
 
