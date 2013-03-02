@@ -133,7 +133,6 @@ function contact_form_7_link_ajax() {
     $id = $plugin->getFirstContactFormId(); // TODO get from option
 	$adresses = $plugin->get_available_adresses($id);
     	
-	// TODO: pre-select select adress (js or GET) from current selection; get Link-Text
    	include_once( dirname(__FILE__) . '/tinymce/window.php');
     
     exit();
@@ -200,10 +199,10 @@ function contact_form_7_select_box_editor_button_option_page()
 add_action('admin_init', 'contact_form_7_link_addbuttons');
 
 function contact_form_7_select_box_editor_button_init_frontend() {
-  // TODO: Only do if a contact form is shown?
+  // Only enqueues once, even if called multiple times
   wp_enqueue_script('jquery');
   wp_enqueue_script('jquery.ba-hashchange', plugins_url('/js/jquery.ba-hashchange.min.js',__FILE__), array('jquery'), CONTACT_FORM_7_SELECT_BOX_EDITOR_BUTTON_VERSION);
   wp_enqueue_script('contact_form_7_select_box_editor_button_init', plugins_url('/js/wpcf-select-box.js',__FILE__), array('jquery', 'jquery.ba-hashchange'), CONTACT_FORM_7_SELECT_BOX_EDITOR_BUTTON_VERSION);
 }
-add_action('init','contact_form_7_select_box_editor_button_init_frontend');
+add_action('wpcf7_contact_form','contact_form_7_select_box_editor_button_init_frontend');
 
