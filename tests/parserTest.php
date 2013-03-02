@@ -2,19 +2,37 @@
 
 require_once(dirname(__FILE__) . '/PluginTestTemplate.php');
 
+function test_formatValues($name, $email)
+{
+	return array('name' => $name, 'email' => $email);
+}
+
 class Wpcf7SimpleRegexParserTest extends PluginTestTemplate
 {
 	function setUp()
 	{
 		parent::setUp();
-		$this->parser = new Wpcf7_SelectBoxEditorButton_SimpleRegexParser();
+		$this->parser = new Wpcf7_SelectBoxEditorButton_SimpleRegexParser('test_formatValues');
 	}
 	
 	function testExtractAdresses()
 	{
 		$text = '[select* recipient id:recipient "John Doe|jondoe@example.org" "Max Mustermann|maxmustermann@example.org"]';
+		$parsed = array(
+				array('name' => 'John Doe', 'email' => 'jondoe@example.org'),
+				array('name' => 'Max Mustermann', 'email' => 'maxmustermann@example.org'),
+		);
+		$this->assertSame($parsed, $this->parser->getAdressesFromFormText($text));
+	}
+	
+	function testExtractAdressesCount()
+	{
+		$text = '[select* recipient id:recipient "John Doe|jondoe@example.org" "Max Mustermann|maxmustermann@example.org"]';
 		$this->assertCount(2, $this->parser->getAdressesFromFormText($text));
 
+		$text = '[select* recipient id:recipient "Jöhn Dœe|jondoe@example.org" "Mäx Mußtermann|maxmustermann@example.org"]';
+		$this->assertCount(2, $this->parser->getAdressesFromFormText($text), "UTF-8");
+		
 		$text = '[select* recipient id:recipient "John Doe|jondoe@example.org" ]';
 		$this->assertCount(1, $this->parser->getAdressesFromFormText($text), "One w/ space");
 		
@@ -24,10 +42,6 @@ class Wpcf7SimpleRegexParserTest extends PluginTestTemplate
 		// Skip when not an email adress
 		$text = '[select* recipient id:recipient "John Doe|jondoeexample.org" "Max Mustermann|maxmustermann@example.org"]';
 		$this->assertCount(1, $this->parser->getAdressesFromFormText($text), "Skip when not an email adress");
-		
-		// Email adress only
-		$text = '[select* recipient id:recipient "jondoe@example.org" "maxmustermann@example.org"]';
-		$this->assertCount(2, $this->parser->getAdressesFromFormText($text), "Email adresses only");
 	}
 	
 	function testFormTextValidFormatValid()
@@ -83,6 +97,13 @@ class Wpcf7SimpleRegexWpcf7ParserTest extends Wpcf7SimpleRegexParserTest
 	function setUp()
 	{
 		parent::setUp();
-		$this->parser = new Wpcf7_SelectBoxEditorButton_Wpcf7_Shortcode_Parser();
+		$this->parser = new Wpcf7_SelectBoxEditorButton_Wpcf7_Shortcode_Parser('test_formatValues');
+	}
+	
+	function testEmailAdressesOnly()
+	{
+		// Email adress only
+		$text = '[select* recipient id:recipient "jondoe@example.org" "maxmustermann@example.org"]';
+		$this->assertCount(2, $this->parser->getAdressesFromFormText($text), "Email adresses only");
 	}
 }
