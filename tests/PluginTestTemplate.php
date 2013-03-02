@@ -14,6 +14,23 @@ if (!function_exists('add_action')) {
 }
 require_once(dirname(__FILE__) . '/../contact-form-7-select-box-editor-button.php');
 
+if (!function_exists('apply_filters')) {
+	function apply_filters($name, $value) { return $value; }
+}
+if (!function_exists('is_email')) {
+	function is_email($adress) { return strpos($adress, '@') !== false; }
+}
+
+if (!class_exists('WPCF7_ShortcodeManager'))
+{
+	if ( ! defined( 'WPCF7_USE_PIPE' ) )
+		define( 'WPCF7_USE_PIPE', true );
+	
+	require_once(dirname(__FILE__) . '/../../contact-form-7/includes/formatting.php');
+	require_once(dirname(__FILE__) . '/../../contact-form-7/includes/shortcodes.php');
+	require_once(dirname(__FILE__) . '/../../contact-form-7/includes/pipe.php');
+}
+
 abstract class PluginTestTemplate extends PHPUnit_Framework_TestCase
 {
 	protected $pluginObject;

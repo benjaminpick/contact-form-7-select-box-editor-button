@@ -66,16 +66,67 @@ class AddContactForm7Link
 		if (!is_object($contact_form))
 			return $contact_form;
 		
-		return $this->getAdressesFromFormText($contact_form->form);
+		return $this->getAdressesFromFormText2($contact_form->form);
 	}
 	
 	public function getAdressesFromFormText($text)
+	{
+		$wpcf7_shortcode_manager = new WPCF7_ShortcodeManager();
+		$wpcf7_shortcode_manager->add_shortcode( 'select', array($this, 'selectShortcodeCallback'), true);
+		$wpcf7_shortcode_manager->add_shortcode( 'select*', array($this, 'selectShortcodeCallback'), true);
+		
+		$text = $wpcf7_shortcode_manager->normalize_shortcode($text);
+		
+		$this->adresses = array();
+		$wpcf7_shortcode_manager->do_shortcode( $text, true );
+		if (empty($this->adresses))
+			return (string) $this->last_error_message;
+		return $this->adresses;
+	}
+	
+	protected $adresses;
+	protected $last_error_message;
+	
+	public function selectShortcodeCallback($tag)
+	{
+		$options = (array) $tag['options'];
+		$values = (array) $tag['values'];
+		$raw_values = (array) $tag['raw_values'];
+		$labels = (array) $tag['labels'];
+		
+		$id_att = null;
+		foreach ( $options as $option )
+		{
+			if ( preg_match( '%^id:([-0-9a-zA-Z_]+)$%', $option, $matches ) ) {
+				$id_att = $matches[1];
+			}
+		}
+		if (is_null($id_att))
+			return _log($this->last_error_message = 'Select element needs id:recipient !');
+		else if ($id_att != 'recipient')
+			return _log($this->last_error_message = 'Select element id needs to be id:recipient !');
+			
+		foreach($raw_values as $i => $value)
+		{
+			$exploded = explode('|', $value);
+			if (count($exploded) >= 2)
+				list($name, $email) = $exploded;
+			else
+				$name = $email = $exploded[0];
+			if (!is_email($email))
+				continue;
+			
+			$this->adresses[] = $this->getValues($name, $email);
+		}
+	}
+	
+	public function getAdressesFromFormText2($text)
 	{
 		$res = preg_match('/\[select\*? .* id:([a-z]+)[^"]* (".*")[^"]*\]/i', $text, $matches);
 		if ($res == 0)
 			return _log('No select box found.');
 		
-		$id = $matches[1]; // Currently hardcoded to #recipient : TODO Show error if not present or different id
+		$id = $matches[1]; // Currently hardcoded to #recipient : TODO Show error if different id
 		$adresses = $matches[2];
 		
 		preg_match_all('/"([^"|]+)\|([^"|]+@[^"|]+)"/', $adresses, $matches, PREG_SET_ORDER);
@@ -85,16 +136,21 @@ class AddContactForm7Link
 		{
 			$name = $match[1];
 			$email = $match[2];
-				
-			$url = '#' . str_replace("%20", "+", urlencode($name));
-			$label = $name . " <" . $email . ">";
-				
-			$ret[] = array('url' => $url, 'email' => $email, 'name' => $name, 'label' => $label);
+
+			$ret[] = $this->getValues($name, $email);
 		}
 		
 		_log($ret);
 		
 		return $ret;
+	}
+	
+	protected function getValues($name, $email)
+	{
+		$url = '#' . str_replace("%20", "+", urlencode($name));
+		$label = $name . " <" . $email . ">";
+		
+		return array('url' => $url, 'email' => $email, 'name' => $name, 'label' => $label);
 	}
 	
 	public function getFirstContactFormId()
