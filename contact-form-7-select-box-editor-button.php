@@ -11,7 +11,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 /***************************************************************************
 
-Copyright: Benjamin Pick, 2012
+Copyright: Benjamin Pick, 2012-2013
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -31,8 +31,10 @@ The license is also available at http://www.gnu.org/copyleft/gpl.html
 **************************************************************************/
 
 define('CONTACT_FORM_7_SELECT_BOX_EDITOR_BUTTON_VERSION', '0.3.3');
+require_once(dirname(__FILE__) . '/parsers.php');
 
 load_plugin_textdomain('contact-form-7-select-box-editor-button', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/');
+
 if(!function_exists('_log')){
   function _log( $message ) {
     if( WP_DEBUG === true ){
@@ -48,6 +50,18 @@ if(!function_exists('_log')){
 
 class AddContactForm7Link
 {
+	/**
+	 * @var Wpcf7_SelectBoxEditorButton_Parser Parse the select tag of wpcf7 form
+	 */
+	protected $parser;
+	
+	public function __construct($parser = null)
+	{
+		if (is_null($parser) || !($parser instanceof Wpcf7_SelectBoxEditorButton_Parser))
+			$parser = new Wpcf7_SelectBoxEditorButton_SimpleRegexParser();
+		$this->parser = $parser;
+	}
+	
 	/**
 	 * Get email Adresses from a select recipient box
 	 * with form id $id.
@@ -66,91 +80,7 @@ class AddContactForm7Link
 		if (!is_object($contact_form))
 			return $contact_form;
 		
-		return $this->getAdressesFromFormText2($contact_form->form);
-	}
-	
-	public function getAdressesFromFormText($text)
-	{
-		$wpcf7_shortcode_manager = new WPCF7_ShortcodeManager();
-		$wpcf7_shortcode_manager->add_shortcode( 'select', array($this, 'selectShortcodeCallback'), true);
-		$wpcf7_shortcode_manager->add_shortcode( 'select*', array($this, 'selectShortcodeCallback'), true);
-		
-		$text = $wpcf7_shortcode_manager->normalize_shortcode($text);
-		
-		$this->adresses = array();
-		$wpcf7_shortcode_manager->do_shortcode( $text, true );
-		if (empty($this->adresses))
-			return (string) $this->last_error_message;
-		return $this->adresses;
-	}
-	
-	protected $adresses;
-	protected $last_error_message;
-	
-	public function selectShortcodeCallback($tag)
-	{
-		$options = (array) $tag['options'];
-		$values = (array) $tag['values'];
-		$raw_values = (array) $tag['raw_values'];
-		$labels = (array) $tag['labels'];
-		
-		$id_att = null;
-		foreach ( $options as $option )
-		{
-			if ( preg_match( '%^id:([-0-9a-zA-Z_]+)$%', $option, $matches ) ) {
-				$id_att = $matches[1];
-			}
-		}
-		if (is_null($id_att))
-			return _log($this->last_error_message = 'Select element needs id:recipient !');
-		else if ($id_att != 'recipient')
-			return _log($this->last_error_message = 'Select element id needs to be id:recipient !');
-			
-		foreach($raw_values as $i => $value)
-		{
-			$exploded = explode('|', $value);
-			if (count($exploded) >= 2)
-				list($name, $email) = $exploded;
-			else
-				$name = $email = $exploded[0];
-			if (!is_email($email))
-				continue;
-			
-			$this->adresses[] = $this->getValues($name, $email);
-		}
-	}
-	
-	public function getAdressesFromFormText2($text)
-	{
-		$res = preg_match('/\[select\*? .* id:([a-z]+)[^"]* (".*")[^"]*\]/i', $text, $matches);
-		if ($res == 0)
-			return _log('No select box found.');
-		
-		$id = $matches[1]; // Currently hardcoded to #recipient : TODO Show error if different id
-		$adresses = $matches[2];
-		
-		preg_match_all('/"([^"|]+)\|([^"|]+@[^"|]+)"/', $adresses, $matches, PREG_SET_ORDER);
-		
-		$ret = array();
-		foreach($matches as $match)
-		{
-			$name = $match[1];
-			$email = $match[2];
-
-			$ret[] = $this->getValues($name, $email);
-		}
-		
-		_log($ret);
-		
-		return $ret;
-	}
-	
-	protected function getValues($name, $email)
-	{
-		$url = '#' . str_replace("%20", "+", urlencode($name));
-		$label = $name . " <" . $email . ">";
-		
-		return array('url' => $url, 'email' => $email, 'name' => $name, 'label' => $label);
+		return $this->parser->getAdressesFromFormText($contact_form->form);
 	}
 	
 	public function getFirstContactFormId()

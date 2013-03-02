@@ -42,7 +42,7 @@ abstract class PluginTestTemplate extends PHPUnit_Framework_TestCase
 	
 	protected function setUp()
 	{
-		$this->pluginObject = new AddContactForm7Link();
+		//$this->pluginObject = new AddContactForm7Link();
 	}
 	
 	protected static function callProtectedMethod($obj, $name, array $args) {
