@@ -52,8 +52,6 @@ class AddContactForm7Link
 	 * Get email Adresses from a select recipient box
 	 * with form id $id.
 	 *
-	 *
-	 * Enter description here ...
 	 * @param int $id	Id of Form
 	 * @return array(url-hash => label)
 	 */
@@ -68,11 +66,15 @@ class AddContactForm7Link
 		if (!is_object($contact_form))
 			return $contact_form;
 		
-		$text = $contact_form->form;
-		$res = preg_match('/\[select\*? ([a-z]+) [^"]*(".*")[^"]*\]/i', $text, $matches);
+		return $this->getAdressesFromFormText($contact_form->form);
+	}
+	
+	public function getAdressesFromFormText($text)
+	{
+		$res = preg_match('/\[select\*? .* id:([a-z]+)[^"]* (".*")[^"]*\]/i', $text, $matches);
 		if ($res == 0)
 			return _log('No select box found.');
-
+		
 		$id = $matches[1]; // Currently hardcoded to #recipient : TODO Show error if not present or different id
 		$adresses = $matches[2];
 		
@@ -83,10 +85,10 @@ class AddContactForm7Link
 		{
 			$name = $match[1];
 			$email = $match[2];
-			
+				
 			$url = '#' . str_replace("%20", "+", urlencode($name));
 			$label = $name . " <" . $email . ">";
-			
+				
 			$ret[] = array('url' => $url, 'email' => $email, 'name' => $name, 'label' => $label);
 		}
 		

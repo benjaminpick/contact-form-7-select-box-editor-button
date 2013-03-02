@@ -2,7 +2,7 @@
 Contributors: benjamin4
 Tags: tinymce, button, contact form, 
 Requires at least: 3.3
-Tested up to: 3.5
+Tested up to: 3.5.1
 Stable tag: 0.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -65,6 +65,11 @@ so you should remove it from your contact form itself.
 (For this version, the JS code wasn't modified, so it should continue to work if you don't.)
 
 == Changelog ==
+
+= 0.3.3
+
+* Fix: Select box can now have more options (see http://contactform7.com/checkboxes-radio-buttons-and-menus/)
+* Add unit tests
 
 = 0.3.2 =
 * Fix: Recipient is now the same as before submit.
