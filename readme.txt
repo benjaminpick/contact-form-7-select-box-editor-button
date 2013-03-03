@@ -69,6 +69,7 @@ so you should remove it from your contact form itself.
 = 0.3.3
 
 * Fix: Select box can now have more options (see http://contactform7.com/checkboxes-radio-buttons-and-menus/)
+* Show error message if no id/invalid id is given
 * Feature: Load js files only if a contactform is shown
 * Add unit tests
 

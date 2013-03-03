@@ -124,7 +124,6 @@ add_action('wp_ajax_addContactForm7Link_tinymce', 'contact_form_7_link_ajax');
  * @return html content
  */
 function contact_form_7_link_ajax() {
-
     // check for rights
     if ( !current_user_can('edit_pages') && !current_user_can('edit_posts') )
     	die(__("You are not allowed to be here"));
@@ -138,7 +137,8 @@ function contact_form_7_link_ajax() {
     exit();
 }
 
-
+// init process for button control
+add_action('admin_init', 'contact_form_7_link_addbuttons');
 function contact_form_7_link_addbuttons() {
    // Don't bother doing this stuff if the current user lacks permissions
    if ( ! current_user_can('edit_posts') && ! current_user_can('edit_pages') )
@@ -151,7 +151,8 @@ function contact_form_7_link_addbuttons() {
      add_filter('mce_buttons', 'register_contact_form_7_link_button');
    }
 }
- 
+
+
 function register_contact_form_7_link_button($buttons) {
    array_push($buttons, "separator", "addContactForm7Link");
    return $buttons;
@@ -162,12 +163,12 @@ function add_contact_form_7_link_tinymce_plugin($plugin_array) {
    $plugin_array['addContactForm7Link'] = WP_PLUGIN_URL.'/contact-form-7-select-box-editor-button/tinymce/editor_plugin' . (WP_DEBUG ? '_src' : '') .  '.js';
    return $plugin_array;
 }
- 
+
+add_action('admin_menu', 'contact_form_7_select_box_editor_button_admin_menu');
 function contact_form_7_select_box_editor_button_admin_menu($not_used){
     // place the info in the plugin settings page
-		add_options_page(__('Contact Form 7 Select Box Editor Button', 'contact-form-7-select-box-editor-button'), __('Contact Form Editor Button', 'contact-form-7-select-box-editor-button'), 'manage_options', basename(__FILE__), 'contact_form_7_select_box_editor_button_option_page');
+	add_options_page(__('Contact Form 7 Select Box Editor Button', 'contact-form-7-select-box-editor-button'), __('Contact Form Editor Button', 'contact-form-7-select-box-editor-button'), 'manage_options', basename(__FILE__), 'contact_form_7_select_box_editor_button_option_page');
 }
-add_action('admin_menu', 'contact_form_7_select_box_editor_button_admin_menu');
 
 function contact_form_7_select_box_editor_button_option_page()
 {
@@ -195,14 +196,11 @@ function contact_form_7_select_box_editor_button_option_page()
 	include('admin_options.php');
 }
 
-// init process for button control
-add_action('admin_init', 'contact_form_7_link_addbuttons');
-
-function contact_form_7_select_box_editor_button_init_frontend() {
+add_action('wpcf7_contact_form','contact_form_7_select_box_editor_button_init_frontend');
+function contact_form_7_select_box_editor_button_init_frontend($contactForm) {
   // Only enqueues once, even if called multiple times
   wp_enqueue_script('jquery');
   wp_enqueue_script('jquery.ba-hashchange', plugins_url('/js/jquery.ba-hashchange.min.js',__FILE__), array('jquery'), CONTACT_FORM_7_SELECT_BOX_EDITOR_BUTTON_VERSION);
   wp_enqueue_script('contact_form_7_select_box_editor_button_init', plugins_url('/js/wpcf-select-box.js',__FILE__), array('jquery', 'jquery.ba-hashchange'), CONTACT_FORM_7_SELECT_BOX_EDITOR_BUTTON_VERSION);
 }
-add_action('wpcf7_contact_form','contact_form_7_select_box_editor_button_init_frontend');
 

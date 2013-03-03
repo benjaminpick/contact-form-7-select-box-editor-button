@@ -66,9 +66,6 @@ class Wpcf7SimpleRegexParserTest extends PluginTestTemplate
 		$text = '[select*   recipient     id:recipient   "John Doe|jondoe@example.org"   "Max Mustermann|maxmustermann@example.org"   ]';
 		$this->assertTrue(is_array($this->parser->getAdressesFromFormText($text)), "Spaces");
 
-		// Email adress only
-		$text = '[select* recipient id:recipient "jondoe@example.org" "maxmustermann@example.org"]';
-		$this->assertTrue(is_array($this->parser->getAdressesFromFormText($text)), "Email adresses only");
 	}
 
 	function testFormTextValidFormatInvalid()
@@ -90,6 +87,77 @@ class Wpcf7SimpleRegexParserTest extends PluginTestTemplate
 		$this->assertInternalType('string', $this->parser->getAdressesFromFormText($text), "id:recipient is at wrong place, but no error was thrown");
 	}
 	
+	function testEntireForm()
+	{
+		$text = <<<FORM
+<p>Recipient: [select* recipient id:recipient "John Doe|jondoe@example.org" "Max Mustermann|maxmustermann@example.org"]</p>
+
+<p>Your Name (required)<br />
+    [text* your-name] </p>
+
+<p>Your Email (required)<br />
+    [email* your-email] </p>
+
+<p>Subject<br />
+    [text your-subject] </p>
+
+<p>Your Message<br />
+    [textarea your-message] </p>
+
+<p>[submit "Send"]</p>
+FORM;
+		$parsed = $this->parser->getAdressesFromFormText($text);
+		$this->assertInternalType('array', $parsed, "Error: " . $parsed);
+		$this->assertCount(2, $parsed);
+		
+		$text = <<<FORM
+<p>Favorite Meal: [select* meal id:meal "Spaggetti|Spaggetti@example.org" "Pizza|pizza@example.org"]</p>
+		
+<p>Recipient: [select* recipient id:recipient "John Doe|jondoe@example.org" "Max Mustermann|maxmustermann@example.org"]</p>
+		
+<p>Your Name (required)<br />
+    [text* your-name] </p>
+		
+<p>Your Email (required)<br />
+    [email* your-email] </p>
+		
+<p>Subject<br />
+    [text your-subject] </p>
+		
+<p>Your Message<br />
+    [textarea your-message] </p>
+		
+<p>[submit "Send"]</p>
+FORM;
+		$parsed = $this->parser->getAdressesFromFormText($text);
+		$this->assertInternalType('array', $parsed, "2nd select Error: " . $parsed);
+		$this->assertCount(2, $parsed, "2nd select");
+		
+		$text = <<<FORM
+<p>Recipient: [select* recipient id:recipient "John Doe|jondoe@example.org" "Max Mustermann|maxmustermann@example.org"]</p>
+				
+<p>Favorite Meal: [select* meal id:meal "Spaggetti|Spaggetti@example.org" "Pizza|pizza@example.org"]</p>
+				
+<p>Your Name (required)<br />
+    [text* your-name] </p>
+		
+<p>Your Email (required)<br />
+    [email* your-email] </p>
+		
+<p>Subject<br />
+    [text your-subject] </p>
+		
+<p>Your Message<br />
+    [textarea your-message] </p>
+		
+<p>[submit "Send"]</p>
+FORM;
+		$parsed = $this->parser->getAdressesFromFormText($text);
+		$this->assertInternalType('array', $parsed, "2nd select Error: " . $parsed);
+		$this->assertCount(2, $parsed, "2nd select");
+		
+	}
+	
 }
 
 class Wpcf7SimpleRegexWpcf7ParserTest extends Wpcf7SimpleRegexParserTest
@@ -102,6 +170,10 @@ class Wpcf7SimpleRegexWpcf7ParserTest extends Wpcf7SimpleRegexParserTest
 	
 	function testEmailAdressesOnly()
 	{
+		// Email adress only
+		$text = '[select* recipient id:recipient "jondoe@example.org" "maxmustermann@example.org"]';
+		$this->assertTrue(is_array($this->parser->getAdressesFromFormText($text)), "Email adresses only");
+		
 		// Email adress only
 		$text = '[select* recipient id:recipient "jondoe@example.org" "maxmustermann@example.org"]';
 		$this->assertCount(2, $this->parser->getAdressesFromFormText($text), "Email adresses only");

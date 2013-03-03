@@ -82,7 +82,7 @@ class Wpcf7_SelectBoxEditorButton_Wpcf7_Shortcode_Parser extends Wpcf7_SelectBox
 		if (is_null($id_att))
 			return _log($this->last_error_message = 'Select element needs id:recipient !');
 		else if ($id_att != 'recipient')
-			return _log($this->last_error_message = 'Select element id needs to be id:recipient !');
+			return _log($this->last_error_message = 'Select element id needs to be id:recipient (currently is id:' . $id_att. ') !');
 			
 		foreach($raw_values as $i => $value)
 		{
@@ -102,26 +102,34 @@ class Wpcf7_SelectBoxEditorButton_Wpcf7_Shortcode_Parser extends Wpcf7_SelectBox
 class Wpcf7_SelectBoxEditorButton_SimpleRegexParser extends Wpcf7_SelectBoxEditorButton_AbstractParser implements Wpcf7_SelectBoxEditorButton_Parser {
 	public function getAdressesFromFormText($text)
 	{
-		$res = preg_match('/\[select\*? .* id:([a-z]+)[^"]* (".*")[^"]*\]/i', $text, $matches);
+		$res = preg_match_all('/\[select\*? .* id:([a-z]+)[^"]* (".*")[^"]*\]/i', $text, $select_matches, PREG_SET_ORDER);
 		if ($res == 0)
 			return _log('No select box found.');
-	
-		$id = $matches[1];
-		if ($id != 'recipient')
-			return _log('invalid id, needs to be id:recipient'); // Currently hardcoded to #recipient
-		$adresses = $matches[2];
-	
-		preg_match_all('/"([^"|]+)\|([^"|]+@[^"|]+)"/', $adresses, $matches, PREG_SET_ORDER);
-	
-		$ret = array();
-		foreach($matches as $match)
+
+		$ret = null;
+		foreach ($select_matches as $select_match)
 		{
-			$name = $match[1];
-			$email = $match[2];
-	
-			$ret[] = call_user_func($this->formatValuesCallback, $name, $email);;
+			$id = $select_match[1];
+			if ($id != 'recipient')
+			{
+				if (!is_array($ret))
+					$ret = _log('Invalid id, needs to be id:recipient (currently is id:' . $id. ')'); // Currently hardcoded to #recipient
+				continue;
+			}
+			$adresses = $select_match[2];
+		
+			preg_match_all('/"([^"|]+)\|([^"|]+@[^"|]+)"/', $adresses, $matches, PREG_SET_ORDER);
+		
+			foreach($matches as $match)
+			{
+				$name = $match[1];
+				$email = $match[2];
+		
+				if (!is_array($ret))
+					$ret = array();
+				$ret[] = call_user_func($this->formatValuesCallback, $name, $email);;
+			}
 		}
-	
 		return $ret;
 	}
 }
