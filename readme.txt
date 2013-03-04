@@ -1,9 +1,9 @@
 === Contact Form 7 Select Box Editor Button ===
 Contributors: benjamin4
-Tags: tinymce, button, contact form, 
+Tags: tinymce, button, contact form, german
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 0.3.2
+Stable tag: 0.3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,9 +24,10 @@ This little extension guides you to set up *Contact Form 7*, enter the contacts 
 * Contact form links can by styled by CSS
 * Translation to German
 
-**Links:**
+**Requirements:**
 
-* Contact Form 7 (required): http://wordpress.org/extend/plugins/contact-form-7/
+* Contact Form 7 (v3.3 or later): http://wordpress.org/extend/plugins/contact-form-7/
+* PHP 5
 
 == Installation ==
 
@@ -56,6 +57,10 @@ Of course, be welcome! Send me a pull request at [Github](https://github.com/ben
 
 == Upgrade Notice ==
 
+= 0.4 =
+* The Parser has been rewritten to use Contact Form 7 parsing.
+If this happens to break this plugin at your site, please send me your form code so that I can add it to my use cases. 
+
 = 0.3.2 =
 If upgrading this plugin, you should also upgrade Contact Form 7 to at least v3.3.
 
@@ -66,7 +71,11 @@ so you should remove it from your contact form itself.
 
 == Changelog ==
 
-= 0.3.3
+= 0.4 =
+* Feature: The contact form can be chosen via a select box
+* Fix: select box can now have all syntax that wpcf7 supports.
+
+= 0.3.3 =
 
 * Fix: Select box can now have more options (see http://contactform7.com/checkboxes-radio-buttons-and-menus/)
 * Show error message if no id/invalid id is given

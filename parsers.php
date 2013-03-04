@@ -30,7 +30,7 @@ function wpcf7_SelectBoxEditorButton_formatValues($name, $email)
 
 interface Wpcf7_SelectBoxEditorButton_Parser
 {
-	public function __construct($formatValuesCallback);
+	public function __construct($formatValuesCallback = null);
 	public function getAdressesFromFormText($text);
 }
 
@@ -68,9 +68,7 @@ class Wpcf7_SelectBoxEditorButton_Wpcf7_Shortcode_Parser extends Wpcf7_SelectBox
 	public function selectShortcodeCallback($tag)
 	{
 		$options = (array) $tag['options'];
-		$values = (array) $tag['values'];
 		$raw_values = (array) $tag['raw_values'];
-		$labels = (array) $tag['labels'];
 	
 		$id_att = null;
 		foreach ( $options as $option )
@@ -84,7 +82,7 @@ class Wpcf7_SelectBoxEditorButton_Wpcf7_Shortcode_Parser extends Wpcf7_SelectBox
 		else if ($id_att != 'recipient')
 			return _log($this->last_error_message = 'Select element id needs to be id:recipient (currently is id:' . $id_att. ') !');
 			
-		foreach($raw_values as $i => $value)
+		foreach($raw_values as $value)
 		{
 			$exploded = explode('|', $value);
 			if (count($exploded) >= 2)
