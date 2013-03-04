@@ -1,5 +1,6 @@
 <?php
 /* Option page */
+
 ?>
 <div class="wrap">
 	<?php if ($error_msg !== true) : ?>
@@ -21,10 +22,26 @@
 	<table>
 		<tr>
 			<td>
+				<label for="selectform"><?php _e('Which form to use:', 'contact-form-7-select-box-editor-button'); ?></label>
+			</td>
+			<td>
+		<?php if (!is_array($forms) || empty($forms)) : ?>
+			<?php _e('Error: There are no forms to choose from.', 'contact-form-7-select-box-editor-button')?>
+		<?php else: ?>
+			<select id="selectform" name="form" class="regular-text">
+			<?php foreach ($forms as $id => $form) : ?>
+			<option value="<?php echo esc_attr($form->ID); ?>" <?php if ($form_selected_id == $form->ID) echo 'selected="selected"'; ?>><?php echo esc_html($form->post_title); ?></option>
+			<?php endforeach; ?>
+			</select>
+		<?php endif; ?>
+			</td>
+		</tr>
+		<tr>
+			<td>
 				<label for="contactLinkPrefix"><?php _e('URL to contact form:', 'contact-form-7-select-box-editor-button'); ?></label>
 			</td>
 			<td>
-				<input name="contactLinkPrefix" id="contactLinkPrefix" value="<?php echo esc_attr(get_option('contactLinkPrefix', ""));?>" />
+				<input name="contactLinkPrefix" id="contactLinkPrefix" value="<?php echo esc_attr($contactLinkPrefix);?>" class="regular-text" />
 			</td>
 		</tr>
 		<tr>
@@ -32,7 +49,7 @@
 				<label for="contactTitlePrefix"><?php _e('Prefix to title attribute', 'contact-form-7-select-box-editor-button'); ?></label>
 			</td>
 			<td>
-				<input name="contactTitlePrefix" id="contactTitlePrefix" value="<?php echo esc_attr(get_option('contactTitlePrefix', ""));?>" />
+				<input name="contactTitlePrefix" id="contactTitlePrefix" value="<?php echo esc_attr($contactTitlePrefix);?>" class="regular-text" />
 			</td>
 		</tr>
 	</table>
@@ -44,9 +61,9 @@
 	<ol>
 		<li><strike><?php _e('Install Contact Form 7 and this plugin.', 'contact-form-7-select-box-editor-button'); ?></strike><?php _e('(You\'ve done that already, I suppose.)', 'contact-form-7-select-box-editor-button'); ?></li>
 		<li><?php _e('In <a href="admin.php?page=wpcf7">Contact Form 7</a>, create a form containing a select tag, like this:', 'contact-form-7-select-box-editor-button'); ?>
-			<pre>
-			<code>[select* recipient id:recipient "John Doe|jondoe@example.org" "Max Mustermann|maxmustermann@example.org"]</code>
-			</pre>
+<pre>
+<code>[select* recipient id:recipient "John Doe|jondoe@example.org" "Max Mustermann|maxmustermann@example.org"]</code>
+</pre>
 		</li>
 		<li>
 			<?php _e('Set Mail option "To:" to <code>[recipient]</code>.', 'contact-form-7-select-box-editor-button'); ?>

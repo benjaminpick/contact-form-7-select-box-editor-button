@@ -3,7 +3,7 @@
 Plugin Name: Contact Form 7 Select Box Editor Button
 Plugin URI: https://github.com/benjaminpick/wp-contact-form-7-select-box-editor-button
 Description: Add a contact form link into article text. For contact forms where the recipient can be chosen in a select box.
-Version: 0.3.3
+Version: 0.4
 Author: Benjamin Pick
 Author URI: https://github.com/benjaminpick
 License: GPLv2 or later
@@ -30,7 +30,14 @@ The license is also available at http://www.gnu.org/copyleft/gpl.html
 
 **************************************************************************/
 
-define('CONTACT_FORM_7_SELECT_BOX_EDITOR_BUTTON_VERSION', '0.3.3');
+define('CONTACT_FORM_7_SELECT_BOX_EDITOR_BUTTON_VERSION', '0.4');
+
+/**
+ * By default, use the parser of Contact Form 7 itself. Set this variable to true
+ * to use the old (deprecated) regex parser.
+ * @var boolean
+ */
+define('WPCF7_SELECT_BOX_EDITOR_BUTTON_USE_ALTERNATIVE_PARSER', false);
 require_once(dirname(__FILE__) . '/parsers.php');
 
 load_plugin_textdomain('contact-form-7-select-box-editor-button', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/');
@@ -58,7 +65,12 @@ class AddContactForm7Link
 	public function __construct($parser = null)
 	{
 		if (is_null($parser) || !($parser instanceof Wpcf7_SelectBoxEditorButton_Parser))
-			$parser = new Wpcf7_SelectBoxEditorButton_SimpleRegexParser();
+		{
+			if (class_exists('WPCF7_ShortcodeManager') && !WPCF7_SELECT_BOX_EDITOR_BUTTON_USE_ALTERNATIVE_PARSER)
+				$parser = new Wpcf7_SelectBoxEditorButton_Wpcf7_Shortcode_Parser();
+			else
+				$parser = new Wpcf7_SelectBoxEditorButton_SimpleRegexParser();
+		}
 		$this->parser = $parser;
 	}
 	
@@ -71,8 +83,11 @@ class AddContactForm7Link
 	 */
 	public function get_available_adresses($id)
 	{
+		if ($id == 0)
+			$id = $this->getFirstContactFormId();
+
 		if ($id <= 0)
-			return _log('Invalid form!'); // How to throw an error/warning?
+			return _log(__('No Contact Form found.', 'contact-form-7-select-box-editor-button')); // How to throw an error/warning?
 		if (!function_exists('wpcf7_contact_form'))
 			return _log('Contact Form 7 installed and activated?');
 			
@@ -83,15 +98,24 @@ class AddContactForm7Link
 		return $this->parser->getAdressesFromFormText($contact_form->form);
 	}
 	
-	public function getFirstContactFormId()
+	public function getAllForms()
 	{
 		$contact_forms = get_posts( array(
-			'numberposts' => -1,
-			'orderby' => 'ID',
-			'order' => 'ASC',
-			'post_type' => 'wpcf7_contact_form' ) ); // TODO -> select box for options?
-		
-		$first = reset($contact_forms);
+				'numberposts' => -1,
+				'orderby' => 'ID',
+				'order' => 'ASC',
+				'post_type' => 'wpcf7_contact_form' ) );
+		_log($contact_forms);
+		return $contact_forms;
+	}
+
+	/**
+	 * @deprecated Use getAllForms()
+	 * @return int Id of first form
+	 */
+	public function getFirstContactFormId()
+	{
+		$first = reset($this->getAllForms());
 		
 		if ($first)
 			return $first->ID;
@@ -100,13 +124,9 @@ class AddContactForm7Link
 	}
 	
 	
-	public function check_error()
+	public function check_error($formId = 0)
 	{
-		$id = $this->getFirstContactFormId();
-		if ($id < 1)
-			return __('No Contact Form found.', 'contact-form-7-select-box-editor-button');
-		
-		$ret = $this->get_available_adresses($id);
+		$ret = $this->get_available_adresses($formId);
 		if (is_string($ret))
 			return __($ret, 'contact-form-7-select-box-editor-button');
 
@@ -129,7 +149,7 @@ function contact_form_7_link_ajax() {
     	die(__("You are not allowed to be here"));
 
     $plugin = new AddContactForm7Link();
-    $id = $plugin->getFirstContactFormId(); // TODO get from option
+    $id = get_option('contactLinkFormSelectedId', 0);
 	$adresses = $plugin->get_available_adresses($id);
     	
    	include_once( dirname(__FILE__) . '/tinymce/window.php');
@@ -137,7 +157,9 @@ function contact_form_7_link_ajax() {
     exit();
 }
 
-// init process for button control
+
+// --------------------- Backend: Edit Post or Page ----------------
+
 add_action('admin_init', 'contact_form_7_link_addbuttons');
 function contact_form_7_link_addbuttons() {
    // Don't bother doing this stuff if the current user lacks permissions
@@ -164,6 +186,10 @@ function add_contact_form_7_link_tinymce_plugin($plugin_array) {
    return $plugin_array;
 }
 
+
+
+// ------------- Backend: Edit options -------------------------
+
 add_action('admin_menu', 'contact_form_7_select_box_editor_button_admin_menu');
 function contact_form_7_select_box_editor_button_admin_menu($not_used){
     // place the info in the plugin settings page
@@ -177,24 +203,36 @@ function contact_form_7_select_box_editor_button_option_page()
 	{
 		update_option('contactLinkPrefix', $_POST['contactLinkPrefix']);
 		update_option('contactTitlePrefix', $_POST['contactTitlePrefix']);
+		update_option('contactLinkFormSelectedId', (int) @$_POST['form']);
 		$submitted = true;
 	}
 		
 	$class = new AddContactForm7Link();
-	$error_msg = $class->check_error();
+	$forms = $class->getAllForms();
 	
+	// Get current options
+	$form_selected_id = get_option('contactLinkFormSelectedId', 0);
 	$contactLinkPrefix = get_option('contactLinkPrefix', '');
+	$contactTitlePrefix = get_option('contactTitlePrefix', "");
+	
+	// Check for errors
+	$error_msg = $class->check_error($form_selected_id);
 	if (empty($contactLinkPrefix))
 	{
 		if ($error_msg !== true)
 			$error_msg .= "<br />";
 		else
 			$error_msg = '';
-
+	
 		$error_msg .= __('URL of contact form is required!', 'contact-form-7-select-box-editor-button');
 	}
+	
 	include('admin_options.php');
 }
+
+
+
+// --------- Frontend: Add Javascript -----------------
 
 add_action('wpcf7_contact_form','contact_form_7_select_box_editor_button_init_frontend');
 function contact_form_7_select_box_editor_button_init_frontend($contactForm) {
