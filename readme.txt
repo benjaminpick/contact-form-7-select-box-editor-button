@@ -115,7 +115,11 @@ so you should remove it from your contact form itself.
 
 == TO DO ==
 
-* Currently, only one form can be used (let me know if this isn't enough!)
+* Currently, only one form can be used (selectable at the settings page)
 * The URL could be detected (find all articles containing a contact form, and propose them in a select box)
 * When change URL Prefix, at least show a warning that the links need to be updated (load, insert).
 * When clicking on a link that has the form on the same page, should it scroll to the form? Currently, it only changes the selected value.
+
+These are limitations that I may (one day, if/when I come to it) adress in future.
+So if you're a developer and want to adress them yourself,
+go ahead and I will be happy to support you!
