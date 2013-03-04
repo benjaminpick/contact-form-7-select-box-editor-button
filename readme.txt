@@ -72,14 +72,15 @@ so you should remove it from your contact form itself.
 == Changelog ==
 
 = 0.4 =
-* Feature: The contact form can be chosen via a select box
+* NEW: The contact form to use can now be chosen via a select box at the settings page
 * Fix: select box can now have all syntax that wpcf7 supports.
+* De: Translation updated.
 
 = 0.3.3 =
 
 * Fix: Select box can now have more options (see http://contactform7.com/checkboxes-radio-buttons-and-menus/)
 * Show error message if no id/invalid id is given
-* Feature: Load js files only if a contactform is shown
+* NEW: Load js files only if a contactform is shown
 * Add unit tests
 
 = 0.3.2 =

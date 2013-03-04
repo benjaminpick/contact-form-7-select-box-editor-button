@@ -4,122 +4,147 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Contact Form 7 Select Box Editor Button 0.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/contact-form-7-select-box-editor-button\n"
-"POT-Creation-Date: 2012-03-28 09:08:48+00:00\n"
+"POT-Creation-Date: 2013-03-04 11:39:56+00:00\n"
+"PO-Revision-Date: 2013-03-04 12:48+0100\n"
+"Last-Translator: Benjamin\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2012-03-28 15:56+0100\n"
-"Last-Translator: Benjamin\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: admin_options.php:7
+#: admin_options.php:12
 msgid "Parameters saved."
-msgstr "Parameter gespeichert."
+msgstr "Parameter wurden gespeichert."
 
-#. #-#-#-#-#  plugin.pot (Contact Form 7 Select Box Editor Button 0.1)  #-#-#-#-#
+#. #-#-#-#-#  plugin.pot (Contact Form 7 Select Box Editor Button 0.3.3)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
-#: admin_options.php:10
-#: contact-form-7-select-box-editor-button.php:143
+#: admin_options.php:15
+#: contact-form-7-select-box-editor-button.php:170
 msgid "Contact Form 7 Select Box Editor Button"
 msgstr "Contact Form 7 Select Box Editor Button"
 
-#: admin_options.php:13
+#: admin_options.php:18
 msgid "Parameters:"
 msgstr "Parameter:"
 
-#: admin_options.php:19
+#: admin_options.php:24
 msgid "URL to contact form:"
 msgstr "Link zum Kontaktformular:"
 
-#: admin_options.php:27
+#: admin_options.php:32
 msgid "Prefix to title attribute"
 msgstr "Präfix für das title-Attribut"
 
-#: admin_options.php:34
+#: admin_options.php:39
 msgid "Save Parameters"
 msgstr "Speichern"
 
-#: admin_options.php:38
+#: admin_options.php:43
 msgid "First steps"
 msgstr "Erste Schritte"
 
-#: admin_options.php:39
-msgid "SELECT_BOX_EXPLANATION"
-msgstr ""
+#: admin_options.php:45
+msgid "Install Contact Form 7 and this plugin."
+msgstr "Installiere Contact Form 7 und dieses Plugin."
 
-#: contact-form-7-select-box-editor-button.php:104
+#: admin_options.php:45
+msgid "(You've done that already, I suppose.)"
+msgstr "(Das hast du wohl schon gemacht.)"
+
+#: admin_options.php:46
+msgid "In <a href=\"admin.php?page=wpcf7\">Contact Form 7</a>, create a form containing a select tag, like this:"
+msgstr "Erstelle bei <a href=\"admin.php?page=wpcf7\">Contact Form 7</a> ein Formular, das ein select-Befehl beinhaltet, ungefähr so:"
+
+#: admin_options.php:52
+msgid "Set Mail option \"To:\" to <code>[recipient]</code>."
+msgstr "Unter \"Mail\", setze die Option \"An:\" auf <code>[recipient]</code>."
+
+#: admin_options.php:55
+msgid "Now, if you call a page containing this contact form with <code>#Max+Mustermann</code> at the end, it should pre-select him as default."
+msgstr "Wenn du jetzt eine Seite aufrufst, die dieses Kontaktformular enthält, und an die URL ein <code>#Max+Mustermann</code> anhängst, dann wird es ihn als Default anwählen."
+
+#: admin_options.php:58
+msgid "Insert the post's URL above, and then you can edit a page and insert a Link to the contact form of Max Mustermann by clicking the envelope button of the editor."
+msgstr "Schreibe die Seiten-URL von diesem Artikel in die obige Einstellung. Dann kannst du eine Seite bearbeiten und ein Link auf das Kontaktformular von Max Mustermann setzen, indem du auf den Briefumschlag des Editors klickst."
+
+#: admin_options.php:61
+msgid "That's it! You can give feedback in the <a href=\"http://wordpress.org/support/plugin/contact-form-7-select-box-editor-button\" target=\"_blank\">Wordpress Forum</a> or file a bug report at <a href=\"https://github.com/benjaminpick/wp-contact-form-7-select-box-editor-button\" target=\"_blank\">github</a>"
+msgstr "Das war's auch schon. Du kannst im <a href=\"http://wordpress.org/support/plugin/contact-form-7-select-box-editor-button\" target=\"_blank\">Wordpress Forum</a> Feedback geben oder auf <a href=\"https://github.com/benjaminpick/wp-contact-form-7-select-box-editor-button\" target=\"_blank\">Github</a> einen Fehler melden."
+
+#: contact-form-7-select-box-editor-button.php:107
+msgid "No Contact Form found."
+msgstr "Kein Kontaktformular gefunden"
+
+#: contact-form-7-select-box-editor-button.php:129
 msgid "You are not allowed to be here"
 msgstr "Keine Rechte!"
 
-#: contact-form-7-select-box-editor-button.php:143
+#: contact-form-7-select-box-editor-button.php:170
 msgid "Contact Form Editor Button"
 msgstr "Kontaktformular Knopf"
+
+#: contact-form-7-select-box-editor-button.php:194
+msgid "URL of contact form is required!"
+msgstr "URL der Kontaktform muss ausgefüllt werden."
 
 #: tinymce/window.php:12
 msgid "Add Contact Form Link"
 msgstr "Füge ein Kontakt-Link hinzu"
 
-#: tinymce/window.php:44
+#: tinymce/window.php:48
 msgid "Contact not found, no edit mode."
 msgstr "Kontakt wurde nicht gefunden, kann diesen Link nicht bearbeiten."
 
-#: tinymce/window.php:88
+#: tinymce/window.php:98
 msgid "Link text may not be empty!"
 msgstr "Der Link-Text darf nicht leer sein!"
 
-#: tinymce/window.php:115
+#: tinymce/window.php:125
 msgid "Contact"
 msgstr "Kontakt"
 
-#: tinymce/window.php:125
+#: tinymce/window.php:128
+msgid "Error: There are no contacts to choose from."
+msgstr "Fehler: Keine Kontakte gefunden, die man auswählen kann."
+
+#: tinymce/window.php:139
 msgid "Email Adress"
 msgstr "Email-Adresse"
 
-#: tinymce/window.php:131
+#: tinymce/window.php:145
 msgid "Link Text"
 msgstr "Link-Text"
 
-#: tinymce/window.php:133
+#: tinymce/window.php:147
 msgid "E-Mail"
 msgstr "E-Mail"
 
-#: tinymce/window.php:139
+#: tinymce/window.php:153
 msgid "New Contacts can be added in the [contact form menu]."
 msgstr "Neue Kontakte können unter dem [Menüpunkt Formular] hinzugefügt werden."
 
-#: tinymce/window.php:149
+#: tinymce/window.php:162
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: tinymce/window.php:153
+#: tinymce/window.php:166
 msgid "Insert"
 msgstr "Einfügen"
 
 #. Plugin URI of the plugin/theme
-msgid "https://github.com/benjamin4ruby/wp-contact-form-7-select-box-editor-button"
-msgstr "https://github.com/benjamin4ruby/wp-contact-form-7-select-box-editor-button"
+msgid "https://github.com/benjaminpick/wp-contact-form-7-select-box-editor-button"
+msgstr "https://github.com/benjaminpick/wp-contact-form-7-select-box-editor-button"
 
 #. Description of the plugin/theme
 msgid "Add a contact form link into article text. For contact forms where the recipient can be chosen in a select box."
 msgstr "Füge einen Link zum Kontaktformular in den Artikeltext ein. Für Kontaktformular, in denen der Empfänger über eine select-box ausgewählt werden kann."
 
 #. Author of the plugin/theme
-msgid "Benjamin"
-msgstr "Benjamin"
+msgid "Benjamin Pick"
+msgstr "Benjamin Pick"
 
 #. Author URI of the plugin/theme
-msgid "https://github.com/benjamin4ruby"
-msgstr "https://github.com/benjamin4ruby"
-
-#: contact-form-7-select-box-editor-button.php:96
-msgid "No Contact Form found."
-msgstr "Kein Kontaktformular gefunden"
-
-#: contact-form-7-select-box-editor-button.php:183
-msgid "URL of contact form is required!"
-msgstr "URL der Kontaktform muss ausgefüllt werden."
-
-#: tinymce/window.php:124
-msgid "Error: There are no contacts to choose from."
-msgstr "Fehler: Keine Kontakte gefunden, die man auswählen kann."
+msgid "https://github.com/benjaminpick"
+msgstr "https://github.com/benjaminpick"
 
