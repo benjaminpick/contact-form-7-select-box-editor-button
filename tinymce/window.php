@@ -73,7 +73,7 @@ var AddLinkDialog = {
 
 		if (typeof(rawData) == 'string')
 		{
-			alert('Error: Setup incomplete. Go to the option page of the editor button to get the full error message.');
+			alert('Error: Setup incomplete. Go to the settings page of the "Contact form editor button" to get the full error message.');
 			return {};
 		}
 		
