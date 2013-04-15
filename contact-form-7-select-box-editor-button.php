@@ -197,7 +197,7 @@ function contact_form_7_select_box_editor_button_admin_menu($not_used){
 }
 
 function contact_form_7_select_box_editor_button_option_page()
-{
+{// TODO: https://codex.wordpress.org/Settings_API
 	$submitted = false;
 	if (isset($_POST['submit']))
 	{

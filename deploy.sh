@@ -68,6 +68,15 @@ README.md
 .gitignore
 tests" "$SVNPATH/trunk/"
 
+#if submodule exist, recursively check out their indexes (from benbalter)
+if [ -f ".gitmodules" ]
+then
+echo "Exporting the HEAD of each submodule from git to the trunk of SVN"
+git submodule init
+git submodule update
+git submodule foreach --recursive 'git checkout-index -a -f --prefix=$SVNPATH/trunk/$path/'
+fi
+
 echo "Changing directory to SVN and adding new files, if any"
 cd $SVNPATH/trunk/
 # Add all new files that are not set to be ignored

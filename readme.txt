@@ -2,7 +2,7 @@
 Contributors: benjamin4
 Tags: tinymce, button, contact form, german
 Requires at least: 3.3
-Tested up to: 3.5.1
+Tested up to: 3.6
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -27,7 +27,6 @@ This little extension guides you to set up *Contact Form 7*, enter the contacts 
 **Requirements:**
 
 * Contact Form 7 (v3.3 or later): http://wordpress.org/extend/plugins/contact-form-7/
-* PHP 5
 
 == Installation ==
 
