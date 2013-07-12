@@ -8,6 +8,8 @@ Author: Benjamin Pick
 Author URI: https://github.com/benjaminpick
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: contact-form-7-select-box-editor-button
+Domain Path: /lang
 */
 /***************************************************************************
 

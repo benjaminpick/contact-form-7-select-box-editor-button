@@ -12,7 +12,9 @@ if (!function_exists('plugin_basename')) {
 if (!function_exists('add_action')) {
 	function add_action() { }
 }
-require_once(dirname(__FILE__) . '/../contact-form-7-select-box-editor-button.php');
+if (!class_exists('AddContactForm7Link')) {
+	require(dirname(__FILE__) . '/../contact-form-7-select-box-editor-button.php');
+}
 
 if (!function_exists('apply_filters')) {
 	function apply_filters($name, $value) { return $value; }
