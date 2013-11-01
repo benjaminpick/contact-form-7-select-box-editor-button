@@ -200,10 +200,13 @@ function contact_form_7_select_box_editor_button_admin_menu($not_used){
 
 function contact_form_7_select_box_editor_button_option_page()
 {// TODO: https://codex.wordpress.org/Settings_API
+	$errors = array();
 	$submitted = false;
 	if (isset($_POST['submit']))
 	{
-		update_option('contactLinkPrefix', $_POST['contactLinkPrefix']);
+		if (update_option('contactLinkPrefix', $_POST['contactLinkPrefix']))
+			$errors[] = __('Warning: You modified the Contact Form URL. You need to edit all existing links in order to update them, too.', 'contact-form-7-select-box-editor-button');
+		
 		update_option('contactTitlePrefix', $_POST['contactTitlePrefix']);
 		update_option('contactLinkFormSelectedId', (int) @$_POST['form']);
 		$submitted = true;
@@ -218,17 +221,18 @@ function contact_form_7_select_box_editor_button_option_page()
 	$contactTitlePrefix = get_option('contactTitlePrefix', "");
 	
 	// Check for errors
-	$error_msg = $class->check_error($form_selected_id);
+	$hasError= $class->check_error($form_selected_id);
+	if ($hasError !== true)
+		$errors[] = $hasError;
+
 	if (empty($contactLinkPrefix))
 	{
-		if ($error_msg !== true)
-			$error_msg .= "<br />";
-		else
-			$error_msg = '';
-	
-		$error_msg .= __('URL of contact form is required!', 'contact-form-7-select-box-editor-button');
+		$errors[] = __('URL of contact form is required!', 'contact-form-7-select-box-editor-button');
 	}
 	
+	if ($errors)
+		$error_msg = implode('<br /><br />', $errors);
+		
 	include('admin_options.php');
 }
 

@@ -72,6 +72,7 @@ so you should remove it from your contact form itself.
 
 = 0.4.1 =
 * Fix: When a Link is edited, but the current recipient is not in the contact list anymore, the old recipient is now removed anyway.
+* When change URL Prefix, at show a warning that the links need to be updated (open the window and click insert).
 
 = 0.4 =
 * NEW: The contact form to use can now be chosen via a select box at the settings page
@@ -117,14 +118,8 @@ so you should remove it from your contact form itself.
 
 == TO DO ==
 
-On Ajax:
-Warning: Invalid argument supplied for foreach() in /mnt/web2/c0/81/5436181/htdocs/siegen/wp-admin/includes/plugin.php on line 1290
--> admin_menu hook?
-
-
 * Currently, only one form can be used (selectable at the settings page)
 * The URL could be detected (find all articles containing a contact form, and propose them in a select box)
-* When change URL Prefix, at least show a warning that the links need to be updated (load, insert).
 * When clicking on a link that has the form on the same page, should it scroll to the form? Currently, it only changes the selected value.
 
 These are limitations that I may (one day, if/when I come to it) adress in future.

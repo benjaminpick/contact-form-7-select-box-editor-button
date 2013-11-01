@@ -3,7 +3,7 @@
 
 ?>
 <div class="wrap">
-	<?php if ($error_msg !== true) : ?>
+	<?php if (!empty($error_msg)) : ?>
 	<div class="error">
 		<p><?php echo $error_msg; ?></p>
 	</div>
