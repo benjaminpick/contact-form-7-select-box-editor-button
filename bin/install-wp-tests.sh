@@ -30,3 +30,9 @@ sed -i "s/yourpasswordhere/$DB_PASS/" wp-tests-config.php
 
 # create database
 mysqladmin create $DB_NAME --user="$DB_USER" --password="$DB_PASS"
+
+# install plugin
+mkdir -p $WP_TESTS_DIR/wp-content/plugins/contact-form-7
+svn co --quiet https://plugins.svn.wordpress.org/contact-form-7/$WP_CF7_VERSION $WP_TESTS_DIR/wp-content/plugins/contact-form-7
+php activate_plugin.php
+# TODO: 

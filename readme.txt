@@ -114,6 +114,12 @@ so you should remove it from your contact form itself.
 
 == TO DO ==
 
+On Ajax:
+Warning: Invalid argument supplied for foreach() in /mnt/web2/c0/81/5436181/htdocs/siegen/wp-admin/includes/plugin.php on line 1290
+-> admin_menu hook?
+
+When editing a Link with an "invalid recipient" (form was modified) he should replace the old one nonetheless.
+
 * Currently, only one form can be used (selectable at the settings page)
 * The URL could be detected (find all articles containing a contact form, and propose them in a select box)
 * When change URL Prefix, at least show a warning that the links need to be updated (load, insert).
