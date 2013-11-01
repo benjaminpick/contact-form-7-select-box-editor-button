@@ -17,6 +17,16 @@ SVNURL="http://plugins.svn.wordpress.org/contact-form-7-select-box-editor-button
 SVNUSER="benjamin4" # your svn username
 
 
+if [ "$1" = "checkout" ] ; then
+        echo "Only Checkout"
+        echo
+        echo "Creating local copy of SVN repo ..."
+        svn co $SVNURL $SVNPATH
+
+        echo "SVN Repo was checked out to $SVNPATH"
+        exit 0;
+fi
+
 # Let's begin...
 echo ".........................................."
 echo 
