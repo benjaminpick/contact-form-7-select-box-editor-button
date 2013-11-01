@@ -2,7 +2,7 @@
 Contributors: benjamin4
 Tags: tinymce, button, contact form, german
 Requires at least: 3.3
-Tested up to: 3.6
+Tested up to: 3.7.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -53,6 +53,8 @@ Of course, be welcome! Send me a pull request at [Github](https://github.com/ben
 1. Form in action
 2. Editor Button
 3. Parameters
+4. Popup Window to choose Contact
+5. The Email-Adresses are in the Contact Form 7 Tag
 
 == Upgrade Notice ==
 
