@@ -34,5 +34,5 @@ mysqladmin create $DB_NAME --user="$DB_USER" --password="$DB_PASS"
 # install plugin
 mkdir -p $WP_TESTS_DIR/wp-content/plugins/contact-form-7
 svn co --quiet https://plugins.svn.wordpress.org/contact-form-7/$WP_CF7_VERSION $WP_TESTS_DIR/wp-content/plugins/contact-form-7
-php activate_plugin.php
-# TODO: 
+php $WP_TESTS_DIR/wp-content/plugins/contact-form-7-select-box-editor-button/bin/activate_plugin.php contact-form-7 wp-contact-form-7.php
+
