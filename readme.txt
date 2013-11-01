@@ -70,6 +70,9 @@ so you should remove it from your contact form itself.
 
 == Changelog ==
 
+= 0.4.1 =
+* Fix: When a Link is edited, but the current recipient is not in the contact list anymore, the old recipient is now removed anyway.
+
 = 0.4 =
 * NEW: The contact form to use can now be chosen via a select box at the settings page
 * Fix: select box can now have all syntax that wpcf7 supports.
@@ -118,7 +121,6 @@ On Ajax:
 Warning: Invalid argument supplied for foreach() in /mnt/web2/c0/81/5436181/htdocs/siegen/wp-admin/includes/plugin.php on line 1290
 -> admin_menu hook?
 
-When editing a Link with an "invalid recipient" (form was modified) he should replace the old one nonetheless.
 
 * Currently, only one form can be used (selectable at the settings page)
 * The URL could be detected (find all articles containing a contact form, and propose them in a select box)

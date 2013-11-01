@@ -43,13 +43,13 @@ var AddLinkDialog = {
 				if (href.indexOf(rawData[i].url) != -1)
 					break;
 			}
-			if (i >= rawData.length)
+			if (i < rawData.length)
 			{
-				alert('<?php echo esc_js(__("Contact not found, no edit mode.", 'contact-form-7-select-box-editor-button'));?>');
-				return false;
+				jQuery('#selectEmail').val(i);
+				jQuery('#inputLabel').val(parentNode.contents()[0]['nodeValue']);
 			}
-			jQuery('#selectEmail').val(i);
-			jQuery('#inputLabel').val(parentNode.contents()[0]['nodeValue']);
+			else
+				console.log('Warning: Contact ' + href + ' not found.');
 
 			this.local_ed.selection.select(parentNodeRaw);
 		}
