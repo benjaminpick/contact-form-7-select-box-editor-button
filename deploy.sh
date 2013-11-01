@@ -48,7 +48,7 @@ read COMMITMSG
 git commit -am "$COMMITMSG"
 
 echo "Tagging new version in git"
-git tag -a "$NEWVERSION1" -m "Tagging version $NEWVERSION1"
+git tag -a "$NEWVERSION2" -m "Tagging version $NEWVERSION2"
 
 echo "Pushing latest commit to origin, with tags"
 git push origin --all
@@ -66,7 +66,9 @@ svn propset svn:ignore "deploy.sh
 README.md
 .git
 .gitignore
-tests" "$SVNPATH/trunk/"
+tests
+bin
+phpunit.xml" "$SVNPATH/trunk/"
 
 #if submodule exist, recursively check out their indexes (from benbalter)
 if [ -f ".gitmodules" ]
