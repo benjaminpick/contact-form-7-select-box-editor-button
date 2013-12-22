@@ -120,9 +120,9 @@ function updateEmail()
 	
 	<div class="panel_wrapper">
 		<div id="gallery_panel" class="panel current">
-		<table border="0" cellpadding="4" cellspacing="0">
+		<table border="0" cellpadding="4" cellspacing="0" style="font-size: 12px;">
          <tr>
-            <td nowrap="nowrap"><label for="contactlink"><?php _e("Contact", 'contact-form-7-select-box-editor-button'); ?></label></td>
+            <td nowrap="nowrap"><label for="contactlink"><span><?php _e("Contact", 'contact-form-7-select-box-editor-button'); ?></span></label></td>
             <td>
 <?php if (!is_array($adresses) || empty($adresses)) : ?>
 				<?php _e('Error: There are no contacts to choose from.', 'contact-form-7-select-box-editor-button')?>
@@ -136,13 +136,13 @@ function updateEmail()
             </td>
           </tr>
          <tr>
-            <td nowrap="nowrap"><label for="contactlink"><?php _e("Email Adress", 'contact-form-7-select-box-editor-button'); ?></label></td>
+            <td nowrap="nowrap"><label for="contactlink"><span><?php _e("Email Adress", 'contact-form-7-select-box-editor-button'); ?></span></label></td>
             <td>
             	<input id="inputEmailAdress" disabled="disabled" value="" />
             </td>
           </tr>
          <tr>
-            <td nowrap="nowrap"><label for="contactlink"><?php _e("Link Text", 'contact-form-7-select-box-editor-button'); ?></label></td>
+            <td nowrap="nowrap"><label for="contactlink"><span><?php _e("Link Text", 'contact-form-7-select-box-editor-button'); ?></span></label></td>
             <td>
             	<input id="inputLabel" name="label" value="<?php echo _e("E-Mail", 'contact-form-7-select-box-editor-button'); ?>" />
             </td>

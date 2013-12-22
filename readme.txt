@@ -2,7 +2,7 @@
 Contributors: benjamin4
 Tags: tinymce, button, contact form, german
 Requires at least: 3.3
-Tested up to: 3.7.1
+Tested up to: 3.8
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -72,9 +72,12 @@ so you should remove it from your contact form itself.
 
 == Changelog ==
 
+= 0.4.2 =
+* Fix: Admin GUI window for Wordpress 3.8
+
 = 0.4.1 =
 * Fix: When a Link is edited, but the current recipient is not in the contact list anymore, the old recipient is now removed anyway.
-* When change URL Prefix, at show a warning that the links need to be updated (open the window and click insert).
+* NEW: When changing the URL Prefix Option, show a warning that the links need to be updated (open the window and click insert).
 
 = 0.4 =
 * NEW: The contact form to use can now be chosen via a select box at the settings page
