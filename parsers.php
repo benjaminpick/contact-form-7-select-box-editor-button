@@ -45,14 +45,20 @@ abstract class Wpcf7_SelectBoxEditorButton_AbstractParser
 	}
 }
 
+
+if (class_exists('WPCF7_ShortcodeManager')) {
+	class Wpcf7_SelectBoxEditorButton_WPCF7_ShortcodeManager extends WPCF7_ShortcodeManager
+	{
+		// Do not use WPCF7-Singleton to avoid future side effects
+		public function __construct() {}
+	}
+}
+
 class Wpcf7_SelectBoxEditorButton_Wpcf7_Shortcode_Parser extends Wpcf7_SelectBoxEditorButton_AbstractParser implements  Wpcf7_SelectBoxEditorButton_Parser
 {
 	public function getAdressesFromFormText($text)
 	{
-		if (method_exists('WPCF7_ShortcodeManager', 'get_instance'))
-			$wpcf7_shortcode_manager = 	WPCF7_ShortcodeManager::get_instance();
-		else
-			$wpcf7_shortcode_manager = new WPCF7_ShortcodeManager(); // Backward compat WPCF7 < 3.7
+		$wpcf7_shortcode_manager = new Wpcf7_SelectBoxEditorButton_WPCF7_ShortcodeManager();
 
 		$wpcf7_shortcode_manager->add_shortcode( 'select', array($this, 'selectShortcodeCallback'), true);
 		$wpcf7_shortcode_manager->add_shortcode( 'select*', array($this, 'selectShortcodeCallback'), true);

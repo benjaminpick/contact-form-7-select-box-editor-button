@@ -32,7 +32,7 @@ The license is also available at http://www.gnu.org/copyleft/gpl.html
 
 **************************************************************************/
 
-define('CONTACT_FORM_7_SELECT_BOX_EDITOR_BUTTON_VERSION', '0.4.2');
+define('CONTACT_FORM_7_SELECT_BOX_EDITOR_BUTTON_VERSION', '0.4.3');
 
 /**
  * By default, use the parser of Contact Form 7 itself. Set this variable to true
@@ -40,11 +40,11 @@ define('CONTACT_FORM_7_SELECT_BOX_EDITOR_BUTTON_VERSION', '0.4.2');
  * @var boolean
  */
 define('WPCF7_SELECT_BOX_EDITOR_BUTTON_USE_ALTERNATIVE_PARSER', false);
-require_once(dirname(__FILE__) . '/parsers.php');
 
 load_plugin_textdomain('contact-form-7-select-box-editor-button', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/');
 
 if(!function_exists('_log')){
+	// DEBUG FUNCTION, will only be doing something in Dev Environments
   function _log( $message ) {
     if( WP_DEBUG === true ){
       if( is_array( $message ) || is_object( $message ) ){
@@ -176,6 +176,12 @@ function contact_form_7_link_addbuttons() {
    }
 }
 
+function contact_form_7_load_lib()
+{
+	// This needs to be loaded after Contact Form 7 !
+	require_once(dirname(__FILE__) . '/parsers.php');
+}
+add_action('plugins_loaded', 'contact_form_7_load_lib');
 
 function register_contact_form_7_link_button($buttons) {
    array_push($buttons, "separator", "addContactForm7Link");
