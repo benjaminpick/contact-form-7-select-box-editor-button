@@ -36,13 +36,13 @@ echo ".........................................."
 echo 
 
 # Check version in readme.txt is the same as plugin file
-#NEWVERSION1=`grep "^Stable tag" $GITPATH/readme.txt | awk -F' ' '{print $3}'`
+
 #echo "readme version: $NEWVERSION1"
 NEWVERSION2=`grep "^Version" $GITPATH/$MAINFILE | awk -F' ' '{print $2}'`
 echo "$MAINFILE version: $NEWVERSION2"
 NEWVERSION3=`grep "^define.*VERSION" $GITPATH/$MAINFILE | awk -F"'" '{print $4}'`
 echo "$MAINFILE define version: $NEWVERSION3"
-
+NEWVERSION1="$NEWVERSION2"
 # if [ "$NEWVERSION1" != "$NEWVERSION2" ] || [ "$NEWVERSION1" != "$NEWVERSION3" ]; then echo "Versions don't match. Exiting...."; exit 1; fi
 if [ "$NEWVERSION2" != "$NEWVERSION3" ]; then echo "Versions don't match. Exiting...."; exit 1; fi
 
