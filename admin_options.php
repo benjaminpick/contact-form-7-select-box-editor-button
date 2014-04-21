@@ -53,7 +53,7 @@
 			</td>
 		</tr>
 	</table>
-	<input type="submit" value="<?php _e('Save Parameters', 'contact-form-7-select-box-editor-button'); ?>" />
+	<p><input type="submit" class="button button-primary" value="<?php _e('Save Parameters', 'contact-form-7-select-box-editor-button'); ?>" /></p>
 	</form>
 	
 	<p><br /></p>

@@ -228,7 +228,7 @@ function contact_form_7_select_box_editor_button_option_page()
 	
 	// Check for errors
 	$hasError= $class->check_error($form_selected_id);
-	if ($hasError !== true)
+	if (is_string($hasError) && $hasError)
 		$errors[] = $hasError;
 
 	if (empty($contactLinkPrefix))
