@@ -72,6 +72,10 @@ so you should remove it from your contact form itself.
 
 == Changelog ==
 
+= 0.5 =
+* Nicer GUI for Wordpress 3.9
+* First Steps: Automatic checks the items that are done
+
 = 0.4.3 =
 * Compat with TinyMCE4 (upcoming Wordpress) was verified
 * Fix: Compat with WPCF7 3.7
