@@ -1,6 +1,15 @@
 <?php
 /* Option page */
 
+function show_check($checks, $index = null) {
+	static $img_url;
+	if (is_null($img_url))
+		$img_url = plugin_dir_url( __FILE__) . '/img/';
+
+	if ($checks === true || (isset($checks[$index]) && $checks[$index])) {
+		echo '<img src="' . $img_url . 'check.png" class="check" title="' . __('Done.', 'contact-form-7-select-box-editor-button') . '" />';
+	}
+}
 ?>
 <div class="wrap">
 	<?php if (!empty($error_msg)) : ?>
@@ -55,12 +64,15 @@
 	</table>
 	<p><input type="submit" class="button button-primary" value="<?php _e('Save Parameters', 'contact-form-7-select-box-editor-button'); ?>" /></p>
 	</form>
-	
+
+
+
+
 	<p><br /></p>
 	<h4><?php _e('First steps', 'contact-form-7-select-box-editor-button'); ?></h4>
 	<ol>
-		<li><?php _e('Install Contact Form 7', 'contact-form-7-select-box-editor-button'); ?></li>
-		<li><strike><?php _e('Install this plugin.', 'contact-form-7-select-box-editor-button'); ?></strike><?php _e('(You\'ve done that already, I suppose.)', 'contact-form-7-select-box-editor-button'); ?></li>
+		<li><?php printf(__('Install Contact Form 7 (at least Version %s)', 'contact-form-7-select-box-editor-button'), CONTACT_FORM_7_SELECT_BOX_EDITOR_BUTTON_REQUIRE_WPCF7_VERSION); ?><?php show_check($checks, 'wpcf7-installed'); ?></li>
+		<li><strike><?php _e('Install this plugin.', 'contact-form-7-select-box-editor-button'); ?></strike><?php _e('(You\'ve done that already, I suppose.)', 'contact-form-7-select-box-editor-button'); ?><?php show_check(true); ?></li>
 		<li><?php _e('In <a href="admin.php?page=wpcf7">Contact Form 7</a>, create a form containing a select tag, like this:', 'contact-form-7-select-box-editor-button'); ?>
 <pre>
 <code>[select* recipient id:recipient "John Doe|jondoe@example.org" "Max Mustermann|maxmustermann@example.org"]</code>
@@ -76,7 +88,10 @@
 			<?php _e('Insert the post\'s URL above, and then you can edit a page and insert a Link to the contact form of Max Mustermann by clicking the envelope button of the editor.', 'contact-form-7-select-box-editor-button'); ?>
 		</li>
 		<li>
-			<?php _e('That\'s it! You can give feedback in the <a href="http://wordpress.org/support/plugin/contact-form-7-select-box-editor-button" target="_blank">Wordpress Forum</a> or file a bug report at <a href="https://github.com/benjaminpick/wp-contact-form-7-select-box-editor-button" target="_blank">github</a>', 'contact-form-7-select-box-editor-button'); ?>
+			<?php _e('That\'s it! You can give feedback in the <a href="http://wordpress.org/support/plugin/contact-form-7-select-box-editor-button" target="_blank">Wordpress Forum</a> or file a bug report at <a href="https://github.com/benjaminpick/wp-contact-form-7-select-box-editor-button" target="_blank">github</a>.', 'contact-form-7-select-box-editor-button'); ?>
 		</li>
 	</ol>
 </div>
+<style>
+	.check { vertical-align: bottom; padding: 2px 2px 2px 5px; }
+</style>

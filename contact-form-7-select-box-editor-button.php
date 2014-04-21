@@ -34,6 +34,8 @@ The license is also available at http://www.gnu.org/copyleft/gpl.html
 
 define('CONTACT_FORM_7_SELECT_BOX_EDITOR_BUTTON_VERSION', '0.4.3');
 
+define('CONTACT_FORM_7_SELECT_BOX_EDITOR_BUTTON_REQUIRE_WPCF7_VERSION', '3.3');
+
 /**
  * By default, use the parser of Contact Form 7 itself. Set this variable to true
  * to use the old (deprecated) regex parser.
@@ -135,6 +137,15 @@ class AddContactForm7Link
 		return true;
 	}
 	
+	
+	public function getChecks()
+	{
+		$checks = array();
+		
+		$checks['wpcf7-installed'] = defined('WPCF7_VERSION');
+		
+		return $checks;
+	}
 }
 
 // ------------- TinyMCE Kontakt Plugin ---------------
@@ -230,6 +241,8 @@ function contact_form_7_select_box_editor_button_option_page()
 	$hasError= $class->check_error($form_selected_id);
 	if (is_string($hasError) && $hasError)
 		$errors[] = $hasError;
+		
+	$checks = $class->getChecks();
 
 	if (empty($contactLinkPrefix))
 	{
