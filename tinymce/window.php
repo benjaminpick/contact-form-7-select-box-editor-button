@@ -115,45 +115,45 @@ function updateEmail()
 }
 
 </script>
-<body id="link">
+<body class="windows wp-core-ui">
 	<form action="#">
 	
-	<div class="panel_wrapper">
-		<div id="gallery_panel" class="panel current">
-		<table border="0" cellpadding="4" cellspacing="0" style="font-size: 12px;">
-         <tr>
-            <td nowrap="nowrap"><label for="contactlink"><span><?php _e("Contact", 'contact-form-7-select-box-editor-button'); ?></span></label></td>
-            <td>
-<?php if (!is_array($adresses) || empty($adresses)) : ?>
-				<?php _e('Error: There are no contacts to choose from.', 'contact-form-7-select-box-editor-button')?>
-<?php else: ?>
-				<select id="selectEmail" name="email">
-<?php   foreach ($adresses as $id => $adress) : ?>
-					<option value="<?php echo esc_attr($id); ?>"><?php echo esc_html($adress['name']); ?></option>
-<?php   endforeach; ?>
-				</select>
-<?php endif; ?>
-            </td>
-          </tr>
-         <tr>
-            <td nowrap="nowrap"><label for="contactlink"><span><?php _e("Email Adress", 'contact-form-7-select-box-editor-button'); ?></span></label></td>
-            <td>
-            	<input id="inputEmailAdress" disabled="disabled" value="" />
-            </td>
-          </tr>
-         <tr>
-            <td nowrap="nowrap"><label for="contactlink"><span><?php _e("Link Text", 'contact-form-7-select-box-editor-button'); ?></span></label></td>
-            <td>
-            	<input id="inputLabel" name="label" value="<?php echo _e("E-Mail", 'contact-form-7-select-box-editor-button'); ?>" />
-            </td>
-          </tr>
-         <tr>
-            <td nowrap="nowrap"></td>
-            <td>
-            	<?php echo str_replace("[", '<a href="admin.php?page=wpcf7" target="_top">', str_replace(']', '</a>', __('New Contacts can be added in the [contact form menu].', 'contact-form-7-select-box-editor-button'))); ?>
-            </td>
-          </tr>
-        </table>
+	<div class="wrap">
+		<div>
+			<table border="0" cellpadding="4" cellspacing="0" style="font-size: 12px;">
+		     <tr>
+		        <td nowrap="nowrap"><label for="contactlink"><span><?php _e("Contact", 'contact-form-7-select-box-editor-button'); ?></span></label></td>
+		        <td>
+	<?php if (!is_array($adresses) || empty($adresses)) : ?>
+					<?php _e('Error: There are no contacts to choose from.', 'contact-form-7-select-box-editor-button')?>
+	<?php else: ?>
+					<select id="selectEmail" name="email">
+	<?php   foreach ($adresses as $id => $adress) : ?>
+						<option value="<?php echo esc_attr($id); ?>"><?php echo esc_html($adress['name']); ?></option>
+	<?php   endforeach; ?>
+					</select>
+	<?php endif; ?>
+		        </td>
+		      </tr>
+		     <tr>
+		        <td nowrap="nowrap"><label for="contactlink"><span><?php _e("Email Adress", 'contact-form-7-select-box-editor-button'); ?></span></label></td>
+		        <td>
+		        	<input id="inputEmailAdress" disabled="disabled" value="" />
+		        </td>
+		      </tr>
+		     <tr>
+		        <td nowrap="nowrap"><label for="contactlink"><span><?php _e("Link Text", 'contact-form-7-select-box-editor-button'); ?></span></label></td>
+		        <td>
+		        	<input id="inputLabel" name="label" value="<?php echo _e("E-Mail", 'contact-form-7-select-box-editor-button'); ?>" />
+		        </td>
+		      </tr>
+		     <tr>
+		        <td nowrap="nowrap"></td>
+		        <td>
+		        	<?php echo str_replace("[", '<a href="admin.php?page=wpcf7" target="_top">', str_replace(']', '</a>', __('New Contacts can be added in the [contact form menu].', 'contact-form-7-select-box-editor-button'))); ?>
+		        </td>
+		      </tr>
+		    </table>
 		</div>
 	</div>
 
