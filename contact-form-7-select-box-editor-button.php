@@ -222,7 +222,10 @@ function contact_form_7_select_box_editor_button_option_page()
 	$submitted = false;
 	if (isset($_POST['submit']))
 	{
-		if (update_option('contactLinkPrefix', $_POST['contactLinkPrefix'])) // TODO: Do not show error if was empty before
+		$old = get_option('contactLinkPrefix', '');
+		$new = $_POST['contactLinkPrefix'];
+		update_option('contactLinkPrefix', $new);
+		if ($old && $new && $old != $new)
 			$errors[] = __('Warning: You modified the Contact Form URL. You need to edit all existing links in order to update them, too.', 'contact-form-7-select-box-editor-button');
 		
 		update_option('contactTitlePrefix', $_POST['contactTitlePrefix']);
