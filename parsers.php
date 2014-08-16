@@ -56,6 +56,12 @@ if (class_exists('WPCF7_ShortcodeManager')) {
 
 class Wpcf7_SelectBoxEditorButton_Wpcf7_Shortcode_Parser extends Wpcf7_SelectBoxEditorButton_AbstractParser implements  Wpcf7_SelectBoxEditorButton_Parser
 {
+	public function __construct($formatValuesCallback = null) {
+		parent::__construct($formatValuesCallback);
+		
+		$this->last_error_message = "This form does not contain a select-tag (see step 3 below).";
+	}
+	
 	public function getAdressesFromFormText($text)
 	{
 		$wpcf7_shortcode_manager = new Wpcf7_SelectBoxEditorButton_WPCF7_ShortcodeManager();

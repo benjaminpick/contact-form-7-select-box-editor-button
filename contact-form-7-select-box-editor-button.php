@@ -92,14 +92,24 @@ class AddContactForm7Link
 
 		if ($id <= 0)
 			return _log(__('No Contact Form found.', 'contact-form-7-select-box-editor-button')); // How to throw an error/warning?
+
+		$contact_form = $this->get_wpcf7_form($id);
+		if (!is_object($contact_form))
+			return $contact_form;
+			
+		if (method_exists($contact_form, 'prop'))
+			$form = $contact_form->prop('form');
+		else
+			$form = $contact_form->form; // backwards compat: ~3.7
+		
+		return $this->parser->getAdressesFromFormText($form);
+	}
+	
+	public function get_wpcf7_form($id) {
 		if (!function_exists('wpcf7_contact_form'))
 			return _log('Contact Form 7 installed and activated?');
 			
-		$contact_form = wpcf7_contact_form( $id );
-		if (!is_object($contact_form))
-			return $contact_form;
-		
-		return $this->parser->getAdressesFromFormText($contact_form->form);
+		return wpcf7_contact_form( $id );
 	}
 	
 	public function getAllForms()
@@ -136,16 +146,7 @@ class AddContactForm7Link
 
 		return true;
 	}
-	
-	
-	public function getChecks()
-	{
-		$checks = array();
-		
-		$checks['wpcf7-installed'] = defined('WPCF7_VERSION');
-		
-		return $checks;
-	}
+
 }
 
 // ------------- TinyMCE Kontakt Plugin ---------------
@@ -242,11 +243,24 @@ function contact_form_7_select_box_editor_button_option_page()
 	if (is_string($hasError) && $hasError)
 		$errors[] = $hasError;
 		
-	$checks = $class->getChecks();
+	$checks = array();
+	$checks['wpcf7-installed'] = defined('WPCF7_VERSION') && version_compare(WPCF7_VERSION, '3.3', '>');
+	$checks['wpcf7-form-select-tag'] = is_array($class->get_available_adresses($form_selected_id));
+	
+	$form_options = $class->get_wpcf7_form($form_selected_id);
+	if (is_object($form_options))
+		$form_options = $form_options->get_properties();
+	$checks['wpcf7-form-mail-option'] = is_array($form_options) 
+		&& ( strpos($form_options['mail']['recipient'], '[recipient]') !== false || 
+			 ($form_options['mail_2']['active'] && strpos($form_options['mail_2']['recipient'], '[recipient]') !== false) 
+	);
 
 	if (empty($contactLinkPrefix))
 	{
 		$errors[] = __('URL of contact form is required!', 'contact-form-7-select-box-editor-button');
+		$checks['wpcf7-form-url'] = false;
+	} else {
+		$checks['wpcf7-form-url'] = true;	
 	}
 	
 	if ($errors)
