@@ -39,9 +39,10 @@ echo
 
 #echo "readme version: $NEWVERSION1"
 NEWVERSION2=`grep "^Version" $GITPATH/$MAINFILE | awk -F' ' '{print $2}'`
-echo "$MAINFILE version: $NEWVERSION2"
-NEWVERSION3=`grep "^define.*VERSION" $GITPATH/$MAINFILE | awk -F"'" '{print $4}'`
-echo "$MAINFILE define version: $NEWVERSION3"
+echo "$MAINFILE version: '$NEWVERSION2'"
+NEWVERSION3=`grep "^define[^;]*VERSION" $GITPATH/$MAINFILE | head -n 1 | awk -F"'" '{print $4}'`
+echo "$MAINFILE define version: '$NEWVERSION3'"
+
 NEWVERSION1="$NEWVERSION2"
 # if [ "$NEWVERSION1" != "$NEWVERSION2" ] || [ "$NEWVERSION1" != "$NEWVERSION3" ]; then echo "Versions don't match. Exiting...."; exit 1; fi
 if [ "$NEWVERSION2" != "$NEWVERSION3" ]; then echo "Versions don't match. Exiting...."; exit 1; fi

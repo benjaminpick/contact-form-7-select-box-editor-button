@@ -33,7 +33,6 @@ The license is also available at http://www.gnu.org/copyleft/gpl.html
 **************************************************************************/
 
 define('CONTACT_FORM_7_SELECT_BOX_EDITOR_BUTTON_VERSION', '0.5');
-
 define('CONTACT_FORM_7_SELECT_BOX_EDITOR_BUTTON_REQUIRE_WPCF7_VERSION', '3.3');
 
 /**
@@ -247,7 +246,7 @@ function contact_form_7_select_box_editor_button_option_page()
 		$errors[] = $hasError;
 		
 	$checks = array();
-	$checks['wpcf7-installed'] = defined('WPCF7_VERSION') && version_compare(WPCF7_VERSION, '3.3', '>');
+	$checks['wpcf7-installed'] = defined('WPCF7_VERSION') && version_compare(WPCF7_VERSION, CONTACT_FORM_7_SELECT_BOX_EDITOR_BUTTON_REQUIRE_WPCF7_VERSION, '>=');
 	$checks['wpcf7-form-select-tag'] = is_array($class->get_available_adresses($form_selected_id));
 	
 	$form_options = $class->get_wpcf7_form($form_selected_id);
