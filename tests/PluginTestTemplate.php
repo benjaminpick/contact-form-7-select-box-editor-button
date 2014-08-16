@@ -2,6 +2,14 @@
 
 if (!defined('WP_DEBUG'))
 	define('WP_DEBUG', false);
+	
+if (!defined('ABSPATH'))
+{
+	if (getenv('ABSPATH') && is_dir(getenv('ABSPATH')))
+		define('ABSPATH', getenv('ABSPATH'));
+	else
+		define('ABSPATH', dirname(__FILE__) . '/../../../../');
+}
 
 if (!function_exists('load_plugin_textdomain')) {
 	function load_plugin_textdomain() { }
@@ -28,9 +36,13 @@ if (!class_exists('WPCF7_ShortcodeManager'))
 	if ( ! defined( 'WPCF7_USE_PIPE' ) )
 		define( 'WPCF7_USE_PIPE', true );
 	
-	require_once(dirname(__FILE__) . '/../../contact-form-7/includes/formatting.php');
-	require_once(dirname(__FILE__) . '/../../contact-form-7/includes/shortcodes.php');
-	require_once(dirname(__FILE__) . '/../../contact-form-7/includes/pipe.php');
+	require_once(ABSPATH . '/wp-content/plugins/contact-form-7/includes/formatting.php');
+	require_once(ABSPATH . '/wp-content/plugins/contact-form-7/includes/shortcodes.php');
+	require_once(ABSPATH . '/wp-content/plugins/contact-form-7/includes/pipe.php');
+}
+
+if (!class_exists('Wpcf7_SelectBoxEditorButton_Wpcf7_Shortcode_Parser')) {
+	require(dirname(__FILE__) . '/../parsers.php');	
 }
 
 abstract class PluginTestTemplate extends PHPUnit_Framework_TestCase
