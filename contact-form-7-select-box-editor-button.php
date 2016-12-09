@@ -69,7 +69,7 @@ class AddContactForm7Link
 	{
 		if (is_null($parser) || !($parser instanceof Wpcf7_SelectBoxEditorButton_Parser))
 		{
-			if (class_exists('WPCF7_ShortcodeManager') && !WPCF7_SELECT_BOX_EDITOR_BUTTON_USE_ALTERNATIVE_PARSER)
+			if ((class_exists('WPCF7_FormTagsManager') ||class_exists('WPCF7_ShortcodeManager')) && !WPCF7_SELECT_BOX_EDITOR_BUTTON_USE_ALTERNATIVE_PARSER)
 				$parser = new Wpcf7_SelectBoxEditorButton_Wpcf7_Shortcode_Parser();
 			else
 				$parser = new Wpcf7_SelectBoxEditorButton_SimpleRegexParser();
@@ -128,7 +128,8 @@ class AddContactForm7Link
 	 */
 	public function getFirstContactFormId()
 	{
-		$first = reset($this->getAllForms());
+		$arr = $this->getAllForms();
+		$first = reset($arr);
 		
 		if ($first)
 			return $first->ID;
@@ -164,9 +165,9 @@ function contact_form_7_link_ajax() {
     $plugin = new AddContactForm7Link();
     $id = get_option('contactLinkFormSelectedId', 0);
 	$adresses = $plugin->get_available_adresses($id);
-    	
+   	
    	include_once( dirname(__FILE__) . '/tinymce/window.php');
-    
+ 
     exit();
 }
 
@@ -181,7 +182,6 @@ function contact_form_7_link_addbuttons() {
  
    // Add only in Rich Editor mode
    if ( get_user_option('rich_editing') == 'true') {
-   	_log('Add Button!');
      add_filter("mce_external_plugins", "add_contact_form_7_link_tinymce_plugin");
      add_filter('mce_buttons', 'register_contact_form_7_link_button');
    }

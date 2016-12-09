@@ -46,11 +46,31 @@ abstract class Wpcf7_SelectBoxEditorButton_AbstractParser
 }
 
 
-if (class_exists('WPCF7_ShortcodeManager')) {
+if (class_exists('WPCF7_FormTagsManager')) {
+	// CF7 >= 4.6
+	class Wpcf7_SelectBoxEditorButton_WPCF7_ShortcodeManager extends WPCF7_FormTagsManager
+	{
+		// Do not use WPCF7-Singleton to avoid future side effects
+		public function __construct() {}		
+	}
+} else if (class_exists('WPCF7_ShortcodeManager')) {
 	class Wpcf7_SelectBoxEditorButton_WPCF7_ShortcodeManager extends WPCF7_ShortcodeManager
 	{
 		// Do not use WPCF7-Singleton to avoid future side effects
 		public function __construct() {}
+		
+		public function add( $tag, $func, $has_name = false ) {
+			return $this->add_shortcode( $tag, $func, $has_name );
+		}
+		
+		public function normalize( $content )
+		{
+			return $this->normalize_shortcode($content);
+		}	
+		
+		public function scan( $content, $replace = false ) {
+			return $this->do_shortcode($content, $replace);
+		}
 	}
 }
 
@@ -66,13 +86,13 @@ class Wpcf7_SelectBoxEditorButton_Wpcf7_Shortcode_Parser extends Wpcf7_SelectBox
 	{
 		$wpcf7_shortcode_manager = new Wpcf7_SelectBoxEditorButton_WPCF7_ShortcodeManager();
 
-		$wpcf7_shortcode_manager->add_shortcode( 'select', array($this, 'selectShortcodeCallback'), true);
-		$wpcf7_shortcode_manager->add_shortcode( 'select*', array($this, 'selectShortcodeCallback'), true);
+		$wpcf7_shortcode_manager->add( 'select', array($this, 'selectShortcodeCallback'), true);
+		$wpcf7_shortcode_manager->add( 'select*', array($this, 'selectShortcodeCallback'), true);
 	
-		$text = $wpcf7_shortcode_manager->normalize_shortcode($text);
+		$text = $wpcf7_shortcode_manager->normalize($text);
 	
 		$this->adresses = array();
-		$wpcf7_shortcode_manager->do_shortcode( $text, true );
+		$wpcf7_shortcode_manager->scan( $text, true );
 		if (empty($this->adresses))
 			return (string) $this->last_error_message;
 		return $this->adresses;

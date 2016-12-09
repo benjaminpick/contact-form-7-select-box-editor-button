@@ -2,7 +2,7 @@
 Contributors: benjamin4
 Tags: tinymce, button, contact form, german
 Requires at least: 3.3
-Tested up to: 4.0
+Tested up to: 4.7
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -71,6 +71,9 @@ so you should remove it from your contact form itself.
 (For this version, the JS code wasn't modified, so it should continue to work if you don't.)
 
 == Changelog ==
+
+= 0.6 =
+* Fix compatibility with WPCF7 4.6
 
 = 0.5 =
 * Nicer GUI for Wordpress 3.9
