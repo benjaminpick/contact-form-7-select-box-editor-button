@@ -3,7 +3,7 @@
 Plugin Name: Contact Form 7 Select Box Editor Button
 Plugin URI: https://github.com/benjaminpick/wp-contact-form-7-select-box-editor-button
 Description: Add a contact form link into article text. For contact forms where the recipient can be chosen in a select box.
-Version: 0.6
+Version: 0.9-beta
 Author: Benjamin Pick
 Author URI: https://github.com/benjaminpick
 License: GPLv2 or later
@@ -13,7 +13,7 @@ Domain Path: /lang
 */
 /***************************************************************************
 
-Copyright: Benjamin Pick, 2012-2013
+Copyright: Benjamin Pick, 2012-2020
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -32,7 +32,7 @@ The license is also available at http://www.gnu.org/copyleft/gpl.html
 
 **************************************************************************/
 
-define('CONTACT_FORM_7_SELECT_BOX_EDITOR_BUTTON_VERSION', '0.6');
+define('CONTACT_FORM_7_SELECT_BOX_EDITOR_BUTTON_VERSION', '0.9-beta');
 define('CONTACT_FORM_7_SELECT_BOX_EDITOR_BUTTON_REQUIRE_WPCF7_VERSION', '3.3');
 
 /**
@@ -149,6 +149,13 @@ class AddContactForm7Link
 
 }
 
+function contact_form_7_select_box_editor_button_get_adresses() {
+    $plugin = new AddContactForm7Link();
+    $id = get_option('contactLinkFormSelectedId', 0);
+	$adresses = $plugin->get_available_adresses($id);
+	return $adresses;
+}
+
 // ------------- TinyMCE Kontakt Plugin ---------------
 add_action('wp_ajax_addContactForm7Link_tinymce', 'contact_form_7_link_ajax');
 /**
@@ -162,9 +169,7 @@ function contact_form_7_link_ajax() {
     if ( !current_user_can('edit_pages') && !current_user_can('edit_posts') )
     	die(__("You are not allowed to be here"));
 
-    $plugin = new AddContactForm7Link();
-    $id = get_option('contactLinkFormSelectedId', 0);
-	$adresses = $plugin->get_available_adresses($id);
+	$adresses = contact_form_7_select_box_editor_button_get_adresses();
    	
    	include_once( dirname(__FILE__) . '/tinymce/window.php');
  
@@ -216,7 +221,7 @@ function contact_form_7_select_box_editor_button_admin_menu($not_used){
 }
 
 function contact_form_7_select_box_editor_button_option_page()
-{// TODO: https://codex.wordpress.org/Settings_API
+{
 	$errors = array();
 	$submitted = false;
 	if (isset($_POST['submit']))
@@ -252,8 +257,8 @@ function contact_form_7_select_box_editor_button_option_page()
 	$form_options = $class->get_wpcf7_form($form_selected_id);
 	if (is_object($form_options))
 		$form_options = $form_options->get_properties();
-	$checks['wpcf7-form-mail-option'] = is_array($form_options) 
-		&& ( strpos($form_options['mail']['recipient'], '[recipient]') !== false || 
+		$checks['wpcf7-form-mail-option'] = is_array($form_options) &&
+			( strpos($form_options['mail']['recipient'], '[recipient]') !== false || 
 			 ($form_options['mail_2']['active'] && strpos($form_options['mail_2']['recipient'], '[recipient]') !== false) 
 	);
 
@@ -267,7 +272,8 @@ function contact_form_7_select_box_editor_button_option_page()
 	
 	if ($errors)
 		$error_msg = implode('<br /><br />', $errors);
-		
+	
+	$adresses = contact_form_7_select_box_editor_button_get_adresses();
 	include('admin_options.php');
 }
 

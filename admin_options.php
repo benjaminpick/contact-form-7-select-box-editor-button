@@ -57,7 +57,7 @@ function show_check($checks, $index = null) {
 		</tr>
 		<tr>
 			<td>
-				<label for="contactTitlePrefix"><?php _e('Prefix to title attribute', 'contact-form-7-select-box-editor-button'); ?></label>
+				<label for="contactTitlePrefix"><?php _e('Prefix to title attribute (optional)', 'contact-form-7-select-box-editor-button'); ?></label>
 			</td>
 			<td>
 				<input type="text" name="contactTitlePrefix" id="contactTitlePrefix" value="<?php echo esc_attr($contactTitlePrefix);?>" class="regular-text" />
@@ -67,7 +67,18 @@ function show_check($checks, $index = null) {
 	<p><input type="submit" class="button button-primary" value="<?php _e('Save Parameters', 'contact-form-7-select-box-editor-button'); ?>" /></p>
 	</form>
 
+	<h4><?php _e('Link generator', 'contact-form-7-select-box-editor-button'); ?></h4>
 
+	TODO Show error if not all is done below
+
+	<select id="adresses">
+	<?php foreach($adresses as $a) : ?>
+		<option value="<?= esc_attr($a['url']) ?>"><?= esc_html($a['label']) ?></option>
+	<?php endforeach; ?>
+	</select>
+
+	<?php var_dump(	$adresses ) ; ?>
+)
 
 
 	<p><br /></p>
@@ -90,7 +101,7 @@ function show_check($checks, $index = null) {
 			<?php _e('Insert the post\'s URL above.'); ?><?php show_check($checks, 'wpcf7-form-url'); ?>
 		</li>
 		<li>
-			<?php _e('You can now edit a page and insert a Link to the contact form of Max Mustermann by clicking the envelope button of the editor.', 'contact-form-7-select-box-editor-button'); ?>
+			<?php _e('You can now edit a page and insert a Link to the contact form of Max Mustermann by clicking the envelope button of the editor. Or use the link generator above and use the HTML.', 'contact-form-7-select-box-editor-button'); ?>
 		</li>
 		<li>
 			<?php _e('That\'s it! You can give feedback in the <a href="http://wordpress.org/support/plugin/contact-form-7-select-box-editor-button" target="_blank">Wordpress Forum</a> or file a bug report at <a href="https://github.com/benjaminpick/wp-contact-form-7-select-box-editor-button" target="_blank">github</a>.', 'contact-form-7-select-box-editor-button'); ?>
